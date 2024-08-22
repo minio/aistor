@@ -1,0 +1,12 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: eos-controller-sa-binding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: eos-controller-sa-role
+subjects:
+  - kind: ServiceAccount
+    name: eos-controller-sa
+    namespace: eos

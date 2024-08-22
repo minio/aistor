@@ -1,0 +1,25 @@
+namespace: eos
+
+resources:
+  - ../base
+
+patches:
+  - path: overlay/eos-statefulset.yaml
+    target:
+      group: apps
+      kind: StatefulSet
+      name: eos-controller
+      namespace: eos
+      version: v1
+  - path: overlay/eos-service.yaml
+    target:
+      kind: Service
+      name: eos-controller
+      namespace: eos
+      version: v1
+  - path: overlay/eos-service-hl.yaml
+    target:
+      kind: Service
+      name: eos-controller-hl
+      namespace: eos
+      version: v1

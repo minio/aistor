@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: eos-controller
+  namespace: eos
+  labels:
+    eos.min.io/name: eos-controller
+spec:
+  serviceName: eos-hl
+  selector:
+    matchLabels:
+      eos.min.io/name: eos-controller
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        eos.min.io/name: eos-controller
+    spec:
+      serviceAccountName: eos-controller-sa
+      containers:
+        - image: quay.io/minio/eos/controller:RELEASE.2024-08-22T06-54-29Z
+          imagePullPolicy: IfNotPresent
+          name: console
+          env:
+            - name: CONSOLE_CONFIG_DIR_PATH
+              value: /data/config
+            - name: K8S_NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+          ports:
+            - name: http
+              containerPort: 8444
+            - name: control-plane
+              containerPort: 7899
+          args:
+            - server
+          volumeMounts:
+            - mountPath: /data
+              name: console-data
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            runAsNonRoot: true
+            seccompProfile:
+              type: RuntimeDefault
+            capabilities:
+              drop:
+                - "ALL"
+            allowPrivilegeEscalation: false
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        runAsNonRoot: true
+        fsGroupChangePolicy: "OnRootMismatch"
+  volumeClaimTemplates:
+    - metadata:
+        name: console-data
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: "10Gi"
