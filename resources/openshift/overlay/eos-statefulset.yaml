@@ -4,7 +4,7 @@ metadata:
   name: eos-controller
   namespace: eos
   labels:
-    eos.min.io/name: eos
+    eos.min.io/name: eos-controller
 spec:
   template:
     spec:
