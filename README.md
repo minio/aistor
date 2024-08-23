@@ -33,7 +33,7 @@ Other Kubernetes providers may also work.
 1. Install MinIO Enterprise Object Store with the following `kubectl` command
 
    ```shell
-   kubectl apply -k dl.min.io/eos
+   kubectl apply -k dl.min.io/eos.git
    ```
 
 2. Use `kubectl proxy` to port forward the Enterprise Console to access the User Interface
