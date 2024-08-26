@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: eos-controller
+  namespace: eos
+spec:
+  type: LoadBalancer
+  selector:
+    eos.min.io/name: eos-controller

@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: eos-controller
+  namespace: eos
+  labels:
+    eos.min.io/name: eos-controller
+spec:
+  volumeClaimTemplates:
+    - metadata:
+        name: console-data
+      spec:
+        storageClassName: "gp2"
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: "10Gi"
