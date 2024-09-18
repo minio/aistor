@@ -1,0 +1,21 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: aistor
+commonAnnotations:
+  aistor.min.io/authors: MinIO, Inc.
+  aistor.min.io/license: Enterprise
+  aistor.min.io/support: https://subnet.min.io
+
+resources:
+  - resources/base/namespace.yaml
+  - resources/base/service-account.yaml
+  - resources/base/cluster-role.yaml
+  - resources/base/cluster-role-binding.yaml
+  - resources/base/crds/
+  - resources/base/service.yaml
+  - resources/base/deployment-object-store.yaml
+  - resources/base/deployment-observe.yaml
+  - resources/base/deployment-catalog.yaml
+  - resources/base/deployment-loadbalancer.yaml
+  - resources/base/deployment-keymanager.yaml
+  - resources/base/deployment-warp.yaml
