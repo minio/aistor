@@ -18,7 +18,7 @@ spec:
       serviceAccountName: aistor
       containers:
         - name: controller
-          image: registry.min.dev/aistor/operator:2024-09-18-00-29-42
+          image: quay.io/minio/aistor/operator:RELEASE.2024-09-23T16-32-06Z
           imagePullPolicy: IfNotPresent
           args:
             - keymanager
