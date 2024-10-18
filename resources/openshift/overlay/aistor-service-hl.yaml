@@ -3,15 +3,12 @@ kind: Service
 metadata:
   name: aistor-hl
   namespace: aistor
-  labels:
-    aistor.min.io/name: aistor
+  annotations:
+    service.beta.openshift.io/serving-cert-secret-name: aistor-hl-tls
 spec:
-  clusterIP: None
   ports:
-    - name: http
-      port: 8444
-    - name: control-plane
+    - name: https
       protocol: TCP
-      port: 7899
+      port: 9443
   selector:
     aistor.min.io/name: aistor

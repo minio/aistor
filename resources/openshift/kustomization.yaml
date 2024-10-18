@@ -1,25 +1,25 @@
-namespace: eos
+namespace: aistor
 
 resources:
   - ../base
 
 patches:
-  - path: overlay/eos-statefulset.yaml
+  - path: overlay/aistor-statefulset.yaml
     target:
       group: apps
       kind: StatefulSet
-      name: eos-controller
-      namespace: eos
+      name: aistor
+      namespace: aistor
       version: v1
-  - path: overlay/eos-service.yaml
+  - path: overlay/aistor-service.yaml
     target:
       kind: Service
-      name: eos-controller
-      namespace: eos
+      name: aistor
+      namespace: aistor
       version: v1
-  - path: overlay/eos-service-hl.yaml
+  - path: overlay/aistor-service-hl.yaml
     target:
       kind: Service
-      name: eos-controller-hl
-      namespace: eos
+      name: aistor-hl
+      namespace: aistor
       version: v1

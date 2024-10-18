@@ -1,28 +1,28 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: eos-controller
-  namespace: eos
+  name: aistor
+  namespace: aistor
   labels:
-    eos.min.io/name: eos-controller
+    aistor.min.io/name: aistor
 spec:
-  serviceName: eos-hl
+  serviceName: aistor-hl
   selector:
     matchLabels:
-      eos.min.io/name: eos-controller
+      aistor.min.io/name: aistor
   replicas: 1
   template:
     metadata:
       labels:
-        eos.min.io/name: eos-controller
+        aistor.min.io/name: aistor
     spec:
-      serviceAccountName: eos-controller-sa
+      serviceAccountName: aistor-sa
       containers:
-        - image: quay.io/minio/eos/controller:RELEASE.2024-08-22T06-54-29Z
+        - image: registry.min.dev/aistor/aistor:edge
           imagePullPolicy: IfNotPresent
           name: console
           env:
-            - name: CONSOLE_CONFIG_DIR_PATH
+            - name: AISTOR_CONFIG_DIR_PATH
               value: /data/config
             - name: K8S_NODE_NAME
               valueFrom:

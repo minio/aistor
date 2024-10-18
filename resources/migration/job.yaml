@@ -1,0 +1,27 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: migration-job
+#  generateName: migration-job-
+  namespace: aistor
+spec:
+  template:
+    spec:
+      serviceAccountName: aistor-migration-job
+      containers:
+        - name: migration-job
+          image: "quay.io/minio/aistor/operator-migration:RELEASE.2024-10-17T18-11-50Z"
+          imagePullPolicy: IfNotPresent
+          args: [ "upgrade"]
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            runAsNonRoot: true
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            seccompProfile:
+              type: RuntimeDefault
+      restartPolicy: Never
+  backoffLimit: 0

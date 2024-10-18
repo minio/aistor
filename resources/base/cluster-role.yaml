@@ -1,7 +1,7 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: eos-controller-sa-role
+  name: aistor-sa-role
 rules:
   - apiGroups:
       - ""
@@ -75,6 +75,7 @@ rules:
     resources:
       - statefulsets
       - deployments
+      - daemonsets
     verbs:
       - get
       - create
@@ -110,21 +111,27 @@ rules:
   - apiGroups:
       - min.io
     resources:
-      - '*'
+      - "*"
     verbs:
-      - '*'
+      - "*"
   - apiGroups:
-      - eos.min.io
+      - aistor.min.io
     resources:
-      - '*'
+      - "*"
     verbs:
-      - '*'
+      - "*"
   - apiGroups:
       - directpv.min.io
     resources:
-      - '*'
+      - "*"
     verbs:
-      - '*'
+      - "*"
+  - apiGroups:
+      - direct.csi.min.io
+    resources:
+      - "*"
+    verbs:
+      - "*"
   - apiGroups:
       - ""
     resources:
