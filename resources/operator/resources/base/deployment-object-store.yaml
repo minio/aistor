@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: object-store-operator
+  namespace: aistor
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      aistor.min.io/name: object-store-operator
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        aistor.min.io/name: object-store-operator
+    spec:
+      serviceAccountName: aistor
+      containers:
+        - name: controller
+          ports:
+            - containerPort: 4223
+              protocol: TCP
+          image: quay.io/minio/aistor/operator:RELEASE.2024-09-23T16-32-06Z
+          imagePullPolicy: IfNotPresent
+          args:
+            - controller
+            - -license
+            - /tmp/license/minio.license
+          resources:
+            requests:
+              cpu: 200m
+              memory: 256Mi
+              ephemeral-storage: 500Mi
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            runAsNonRoot: true
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            seccompProfile:
+              type: RuntimeDefault
+          env:
+            - name: MINIO_OPERATOR_DEPLOYMENT_NAME
+              value: object-store-operator
+            - name: MINIO_CONSOLE_TLS_ENABLE
+              value: "off"
+            - name: OPERATOR_STS_ENABLED
+              value: "on"
+          volumeMounts:
+            - name: minio-license
+              mountPath: /tmp/license
+      volumes:
+        - name: minio-license
+          secret:
+            defaultMode: 444
+            secretName: minio-license
+            optional: true
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: aistor.min.io/name
+                    operator: In
+                    values:
+                      - object-store-operator
+              topologyKey: kubernetes.io/hostname
