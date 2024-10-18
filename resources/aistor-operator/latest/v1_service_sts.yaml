@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    aistor.min.io/app: sts
+    aistor.min.io/authors: MinIO, Inc.
+    aistor.min.io/license: Enterprise
+    aistor.min.io/support: https://subnet.min.io
+    aistor.min.io/version: RELEASE.2024-10-17T18-11-50Z
+  name: sts
+  namespace: aistor
+spec:
+  ports:
+  - name: https
+    port: 4223
+    targetPort: 4223
+  selector:
+    aistor.min.io/name: object-store-operator
+  type: ClusterIP
