@@ -5,9 +5,8 @@ metadata:
     aistor.min.io/authors: MinIO, Inc.
     aistor.min.io/license: Enterprise
     aistor.min.io/support: https://subnet.min.io
-    aistor.min.io/version: RELEASE.2024-10-17T18-11-50Z
+    aistor.min.io/version: RELEASE.2024-10-24T06-18-32Z
     controller-gen.kubebuilder.io/version: v0.16.3
-    operator.min.io/version: v6.0.1
   name: adminjobs.aistor.min.io
 spec:
   group: aistor.min.io
@@ -1080,16 +1079,11 @@ spec:
                     type: object
                 type: object
               execution:
-                default: parallel
                 enum:
                 - parallel
                 - sequential
                 type: string
               failureStrategy:
-                default: continueOnFailure
-                enum:
-                - continueOnFailure
-                - stopOnFailure
                 type: string
               imagePullPolicy:
                 type: string
@@ -1104,9 +1098,6 @@ spec:
                 type: array
               insecure:
                 type: boolean
-              mcImage:
-                default: quay.io/minio/mc:RELEASE.2024-08-26T10-49-58Z
-                type: string
               objectStore:
                 properties:
                   name:
@@ -1196,6 +1187,9 @@ spec:
                 type: object
               serviceAccountName:
                 type: string
+              ttlSecondsAfterFinished:
+                format: int32
+                type: integer
             required:
             - commands
             - objectStore
@@ -1210,13 +1204,15 @@ spec:
                       type: string
                     name:
                       type: string
+                    podName:
+                      type: string
                     result:
                       type: string
                   required:
                   - result
                   type: object
                 type: array
-              message:
+              error:
                 type: string
               phase:
                 type: string

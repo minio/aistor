@@ -5,7 +5,7 @@ metadata:
     aistor.min.io/authors: MinIO, Inc.
     aistor.min.io/license: Enterprise
     aistor.min.io/support: https://subnet.min.io
-    aistor.min.io/version: RELEASE.2024-10-17T18-11-50Z
+    aistor.min.io/version: RELEASE.2024-10-24T06-18-32Z
     controller-gen.kubebuilder.io/version: v0.16.3
   name: policybindings.sts.min.io
 spec:
