@@ -60,6 +60,7 @@ Other Kubernetes providers may also work.
    Enter the **password** twice.
 
 6. Login with the created credentials.
+
    ![aistor-login.png](images/aistor-login.png)
 
 
