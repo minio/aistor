@@ -1,4 +1,4 @@
-# MinIO Enterprise Object Store
+# AIStor
 
 A unified management interface for all the MinIO Enterprise Store features:
 
