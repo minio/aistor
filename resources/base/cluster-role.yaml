@@ -32,6 +32,7 @@ rules:
       - list
       - patch
       - update
+      - delete
   - apiGroups:
       - ""
     resources:
@@ -116,6 +117,12 @@ rules:
       - "*"
   - apiGroups:
       - aistor.min.io
+    resources:
+      - "*"
+    verbs:
+      - "*"
+  - apiGroups:
+      - sts.min.io
     resources:
       - "*"
     verbs:
