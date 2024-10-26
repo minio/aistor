@@ -6,10 +6,12 @@ A unified management interface for all the MinIO Enterprise Store features:
 - Key Management
 - Load Balancer
 - Firewall
-- Cache
+- Catalog
+- WARP
+- AdminJob
 - Operator
 
-MinIO Enterprise Object Store runs in a Kubernetes cluster.
+AIStor runs in Kubernetes.
 
 ## Pre-requisites
 
@@ -18,7 +20,7 @@ MinIO Enterprise Object Store runs in a Kubernetes cluster.
 
 ### Environment
 
-You can run MinIO Enterprise Object Store on Kubernetes providers such as
+You can run AIStor on Kubernetes providers such as
 
 - Redhat Openshift
 - Google Kubernetes Engine
@@ -30,31 +32,37 @@ Other Kubernetes providers may also work.
 
 ## Getting Started
 
-1. Install MinIO Enterprise Object Store with the following `kubectl` command
+1. Install AIStor with the following `kubectl` command
 
    ```shell
    kubectl apply -k https://min.io/k8s/eos
    ```
 
-2. Use `kubectl proxy` to port forward the Enterprise Console to access the User Interface
+2. Use `kubectl proxy` to port forward the AIStor Console to access the User Interface
 
    ```shell
-   kubectl -n eos port-forward svc/eos-controller 8444:8444
+   kubectl -n aistor port-forward svc/aistor 8444:8444
    ```
 
 3. In your browser, go to http://localhost:8444
 
-4. The MinIO Enterprise Object Store Setup screen prompts for the license.
+4. AIStor Setup screen prompts for the license.
 
-   ![The Setup screen asks for a license ](images/enterprise-register-license.png)
+   ![The Setup screen asks for a license ](images/aistor-setup.png)
 
    To obtain your license, see the [SUBNET cluster registration page](https://subnet.min.io/cluster/register).
 
-5. Create the initial Admin User, then select **Setup Access Points** and click `Finish Setup`.
+5. Create the initial Admin User and click `Finish Setup`.
 
-   ![Register the first Admin user](images/enterprise-admin-first-user.png)
+   ![Register the first Admin user](images/aistor-admin-first-user.png)
 
    Provide the **email address** and **password** for the user.
    Enter the **password** twice.
 
+6. Login with the created credentials.
+   ![aistor-login.png](images/aistor-login.png)
 
+
+7. Welcome to the AIstor dashboard!
+
+   ![aistor-dashboard.png](images/aistor-dashboard.png)
