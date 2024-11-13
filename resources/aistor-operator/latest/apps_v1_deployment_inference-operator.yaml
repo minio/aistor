@@ -6,13 +6,13 @@ metadata:
     aistor.min.io/license: Enterprise
     aistor.min.io/support: https://subnet.min.io
     aistor.min.io/version: RELEASE.2024-11-13T09-02-52Z
-  name: loadbalancer-operator
+  name: inference-operator
   namespace: aistor
 spec:
   replicas: 1
   selector:
     matchLabels:
-      aistor.min.io/name: loadbalancer-operator
+      aistor.min.io/name: inference-operator
   strategy:
     type: Recreate
   template:
@@ -23,7 +23,7 @@ spec:
         aistor.min.io/support: https://subnet.min.io
         aistor.min.io/version: RELEASE.2024-11-13T09-02-52Z
       labels:
-        aistor.min.io/name: loadbalancer-operator
+        aistor.min.io/name: inference-operator
     spec:
       affinity:
         podAntiAffinity:
@@ -33,16 +33,16 @@ spec:
               - key: aistor.min.io/name
                 operator: In
                 values:
-                - loadbalancer-operator
+                - inference-operator
             topologyKey: kubernetes.io/hostname
       containers:
       - args:
-        - loadbalancer
+        - inference
         - -license
         - /tmp/license/minio.license
         env:
         - name: MINIO_OPERATOR_DEPLOYMENT_NAME
-          value: loadbalancer-operator
+          value: inference-operator
         image: quay.io/minio/aistor/operator:RELEASE.2024-11-13T09-02-52Z
         imagePullPolicy: IfNotPresent
         name: controller
@@ -64,7 +64,7 @@ spec:
         volumeMounts:
         - mountPath: /tmp/license
           name: minio-license
-      serviceAccountName: aistor-loadbalancer
+      serviceAccountName: aistor-inference
       volumes:
       - name: minio-license
         secret:

@@ -5,7 +5,7 @@ metadata:
     aistor.min.io/authors: MinIO, Inc.
     aistor.min.io/license: Enterprise
     aistor.min.io/support: https://subnet.min.io
-    aistor.min.io/version: RELEASE.2024-10-24T06-18-32Z
+    aistor.min.io/version: RELEASE.2024-11-13T09-02-52Z
   name: aistor-binding
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -13,5 +13,29 @@ roleRef:
   name: aistor-role
 subjects:
 - kind: ServiceAccount
-  name: aistor
+  name: aistor-aihub
+  namespace: aistor
+- kind: ServiceAccount
+  name: aistor-catalog
+  namespace: aistor
+- kind: ServiceAccount
+  name: aistor-inference
+  namespace: aistor
+- kind: ServiceAccount
+  name: aistor-keymanager
+  namespace: aistor
+- kind: ServiceAccount
+  name: aistor-loadbalancer
+  namespace: aistor
+- kind: ServiceAccount
+  name: aistor-object-store
+  namespace: aistor
+- kind: ServiceAccount
+  name: aistor-observe
+  namespace: aistor
+- kind: ServiceAccount
+  name: aistor-prompt
+  namespace: aistor
+- kind: ServiceAccount
+  name: aistor-warp
   namespace: aistor

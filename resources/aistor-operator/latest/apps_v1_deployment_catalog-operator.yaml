@@ -5,7 +5,7 @@ metadata:
     aistor.min.io/authors: MinIO, Inc.
     aistor.min.io/license: Enterprise
     aistor.min.io/support: https://subnet.min.io
-    aistor.min.io/version: RELEASE.2024-10-24T06-18-32Z
+    aistor.min.io/version: RELEASE.2024-11-13T09-02-52Z
   name: catalog-operator
   namespace: aistor
 spec:
@@ -21,7 +21,7 @@ spec:
         aistor.min.io/authors: MinIO, Inc.
         aistor.min.io/license: Enterprise
         aistor.min.io/support: https://subnet.min.io
-        aistor.min.io/version: RELEASE.2024-10-24T06-18-32Z
+        aistor.min.io/version: RELEASE.2024-11-13T09-02-52Z
       labels:
         aistor.min.io/name: catalog-operator
     spec:
@@ -43,7 +43,7 @@ spec:
         env:
         - name: MINIO_OPERATOR_DEPLOYMENT_NAME
           value: catalog-operator
-        image: quay.io/minio/aistor/operator:RELEASE.2024-10-24T06-18-32Z
+        image: quay.io/minio/aistor/operator:RELEASE.2024-11-13T09-02-52Z
         imagePullPolicy: IfNotPresent
         name: controller
         resources:
@@ -64,7 +64,7 @@ spec:
         volumeMounts:
         - mountPath: /tmp/license
           name: minio-license
-      serviceAccountName: aistor
+      serviceAccountName: aistor-catalog
       volumes:
       - name: minio-license
         secret:
