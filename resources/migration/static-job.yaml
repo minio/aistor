@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-#  name: migration-job
+  #  name: migration-job
   generateName: migration-job-
   namespace: aistor
 spec:
@@ -9,8 +9,8 @@ spec:
     spec:
       containers:
         - name: migration-job
-          image: "quay.io/minio/aistor/operator-migration:RELEASE.2024-09-20T18-14-25Z"
+          image: "quay.io/minio/aistor/operator-migration:RELEASE.2024-11-12T20-52-04Z"
           imagePullPolicy: IfNotPresent
-          args: [ "upgrade"]
+          args: ["upgrade"]
       restartPolicy: Never
   backoffLimit: 1

@@ -5,7 +5,7 @@ metadata:
   namespace: aistor
 rules:
   - apiGroups:
-      - ''
+      - ""
     resources:
       - namespaces
     verbs:
