@@ -4,6 +4,7 @@ kind: Kustomization
 namespace: aistor
 
 resources:
+  - crds/aistor.min.io_serviceconfigurations.yaml
   - namespace.yaml
   - sa.yaml
   - cluster-role.yaml
@@ -11,3 +12,6 @@ resources:
   - statefulset.yaml
   - service.yaml
   - service-hl.yaml
+  # also create the roles for AIStor operator
+  - clusterrole_aistor-role.yaml
+  - cluster-role-binding-install.yaml
