@@ -1,0 +1,16 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  annotations:
+    aistor.min.io/authors: MinIO, Inc.
+    aistor.min.io/license: Enterprise
+    aistor.min.io/support: https://subnet.min.io
+    aistor.min.io/version: RELEASE.2024-11-13T09-02-52Z
+  name: aistor-tokenreview-role
+rules:
+- apiGroups:
+  - authentication.k8s.io
+  resources:
+  - tokenreviews
+  verbs:
+  - create
