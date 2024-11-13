@@ -35,7 +35,7 @@ Other Kubernetes providers may also work.
 1. Install AIStor with the following `kubectl` command
 
    ```shell
-   kubectl apply -k https://min.io/k8s/eos
+   kubectl apply -k https://min.io/k8s/aistor
    ```
 
 2. Use `kubectl proxy` to port forward the AIStor Console to access the User Interface
