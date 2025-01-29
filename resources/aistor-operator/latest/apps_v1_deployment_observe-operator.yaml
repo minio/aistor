@@ -5,7 +5,6 @@ metadata:
     aistor.min.io/authors: MinIO, Inc.
     aistor.min.io/license: Enterprise
     aistor.min.io/support: https://subnet.min.io
-    aistor.min.io/version: RELEASE.2024-11-13T09-02-52Z
   name: observe-operator
   namespace: aistor
 spec:
@@ -21,7 +20,6 @@ spec:
         aistor.min.io/authors: MinIO, Inc.
         aistor.min.io/license: Enterprise
         aistor.min.io/support: https://subnet.min.io
-        aistor.min.io/version: RELEASE.2024-11-13T09-02-52Z
       labels:
         aistor.min.io/name: observe-operator
     spec:
@@ -43,7 +41,7 @@ spec:
         env:
         - name: MINIO_OPERATOR_DEPLOYMENT_NAME
           value: observe-operator
-        image: quay.io/minio/aistor/operator:RELEASE.2024-11-13T09-02-52Z
+        image: quay.io/minio/aistor/operator:RELEASE.2025-01-24T23-41-07Z
         imagePullPolicy: IfNotPresent
         name: controller
         resources:

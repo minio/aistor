@@ -5,13 +5,14 @@ metadata:
     aistor.min.io/authors: MinIO, Inc.
     aistor.min.io/license: Enterprise
     aistor.min.io/support: https://subnet.min.io
-  name: object-store-operator
+    aistor.min.io/version: RELEASE.2024-11-13T09-02-52Z
+  name: prompt-operator
   namespace: aistor
 spec:
   replicas: 1
   selector:
     matchLabels:
-      aistor.min.io/name: object-store-operator
+      aistor.min.io/name: prompt-operator
   strategy:
     type: Recreate
   template:
@@ -20,8 +21,9 @@ spec:
         aistor.min.io/authors: MinIO, Inc.
         aistor.min.io/license: Enterprise
         aistor.min.io/support: https://subnet.min.io
+        aistor.min.io/version: RELEASE.2024-11-13T09-02-52Z
       labels:
-        aistor.min.io/name: object-store-operator
+        aistor.min.io/name: prompt-operator
     spec:
       affinity:
         podAntiAffinity:
@@ -31,44 +33,52 @@ spec:
               - key: aistor.min.io/name
                 operator: In
                 values:
-                - object-store-operator
+                - prompt-operator
             topologyKey: kubernetes.io/hostname
       containers:
       - args:
-        - controller
+        - prompt
         - -license
         - /tmp/license/minio.license
         env:
         - name: MINIO_OPERATOR_DEPLOYMENT_NAME
-          value: object-store-operator
-        - name: OPERATOR_STS_ENABLED
-          value: "on"
+          value: prompt-operator
         image: quay.io/minio/aistor/operator:RELEASE.2025-01-24T23-41-07Z
         imagePullPolicy: IfNotPresent
         name: controller
-        ports:
-        - containerPort: 4223
-          protocol: TCP
         resources:
           requests:
             cpu: 200m
             ephemeral-storage: 500Mi
             memory: 256Mi
-        securityContext:
-          allowPrivilegeEscalation: false
-          capabilities:
-            drop:
-            - ALL
-          runAsGroup: 1000
-          runAsNonRoot: true
-          runAsUser: 1000
-          seccompProfile:
-            type: RuntimeDefault
+        securityContext: {}
         volumeMounts:
+        - mountPath: /tmp/service-ca
+          name: openshift-service-ca
+        - mountPath: /tmp/csr-signer-ca
+          name: openshift-csr-signer-ca
         - mountPath: /tmp/license
           name: minio-license
-      serviceAccountName: aistor-object-store
+      securityContext: {}
+      serviceAccountName: aistor-prompt
       volumes:
+      - configMap:
+          items:
+          - key: service-ca.crt
+            path: service-ca.crt
+          name: openshift-service-ca.crt
+          optional: true
+        name: openshift-service-ca
+      - name: openshift-csr-signer-ca
+        projected:
+          defaultMode: 420
+          sources:
+          - secret:
+              items:
+              - key: tls.crt
+                path: tls.crt
+              name: openshift-csr-signer-ca
+              optional: true
       - name: minio-license
         secret:
           defaultMode: 444
