@@ -71,6 +71,18 @@ rules:
       - create
       - list
       - patch
+      - update
+  - apiGroups:
+      - storage.k8s.io
+    resources:
+      - csidrivers
+    verbs:
+      - get
+      - watch
+      - create
+      - list
+      - patch
+      - update
   - apiGroups:
       - apps
     resources:
@@ -259,6 +271,8 @@ rules:
     resources:
       - clusterrolebindings
       - clusterroles
+      - rolebindings
+      - roles
     verbs:
       - "*"
   - apiGroups:
