@@ -18,7 +18,7 @@ spec:
     spec:
       serviceAccountName: aistor-sa
       containers:
-        - image: quay.io/minio/aistor:RELEASE.2024-11-13T18-25-24Z
+        - image: quay.io/minio/aistor:RELEASE.2025-01-28T19-50-23Z
           imagePullPolicy: IfNotPresent
           name: console
           env:
