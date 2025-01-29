@@ -5,7 +5,7 @@ metadata:
     aistor.min.io/authors: MinIO, Inc.
     aistor.min.io/license: Enterprise
     aistor.min.io/support: https://subnet.min.io
-    aistor.min.io/version: RELEASE.2024-10-24T06-18-32Z
+    aistor.min.io/version: RELEASE.2024-11-13T09-02-52Z
   name: keymanager-operator
   namespace: aistor
 spec:
@@ -21,7 +21,7 @@ spec:
         aistor.min.io/authors: MinIO, Inc.
         aistor.min.io/license: Enterprise
         aistor.min.io/support: https://subnet.min.io
-        aistor.min.io/version: RELEASE.2024-10-24T06-18-32Z
+        aistor.min.io/version: RELEASE.2024-11-13T09-02-52Z
       labels:
         aistor.min.io/name: keymanager-operator
     spec:
@@ -43,7 +43,7 @@ spec:
         env:
         - name: MINIO_OPERATOR_DEPLOYMENT_NAME
           value: keymanager-operator
-        image: quay.io/minio/aistor/operator:RELEASE.2024-10-24T06-18-32Z
+        image: quay.io/minio/aistor/operator:RELEASE.2025-01-24T23-41-07Z
         imagePullPolicy: IfNotPresent
         name: controller
         resources:
@@ -51,31 +51,17 @@ spec:
             cpu: 200m
             ephemeral-storage: 500Mi
             memory: 256Mi
+        securityContext: {}
         volumeMounts:
         - mountPath: /tmp/service-ca
           name: openshift-service-ca
         - mountPath: /tmp/csr-signer-ca
           name: openshift-csr-signer-ca
-        - mountPath: /tmp/sts
-          name: sts-tls
         - mountPath: /tmp/license
           name: minio-license
-      imagePullSecrets:
-      - name: registry-creds
-      serviceAccountName: aistor
+      securityContext: {}
+      serviceAccountName: aistor-keymanager
       volumes:
-      - name: sts-tls
-        projected:
-          defaultMode: 420
-          sources:
-          - secret:
-              items:
-              - key: tls.crt
-                path: public.crt
-              - key: tls.key
-                path: private.key
-              name: sts-tls
-              optional: true
       - configMap:
           items:
           - key: service-ca.crt

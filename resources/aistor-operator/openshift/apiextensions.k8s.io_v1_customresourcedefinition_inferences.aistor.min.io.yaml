@@ -7,16 +7,16 @@ metadata:
     aistor.min.io/support: https://subnet.min.io
     aistor.min.io/version: RELEASE.2024-11-13T09-02-52Z
     controller-gen.kubebuilder.io/version: v0.16.3
-  name: loadbalancers.aistor.min.io
+  name: inferences.aistor.min.io
 spec:
   group: aistor.min.io
   names:
-    kind: LoadBalancer
-    listKind: LoadBalancerList
-    plural: loadbalancers
+    kind: Inference
+    listKind: InferenceList
+    plural: inferences
     shortNames:
-    - lb
-    singular: loadbalancer
+    - inference
+    singular: inference
   scope: Namespaced
   versions:
   - additionalPrinterColumns:
@@ -25,6 +25,9 @@ spec:
       type: string
     - jsonPath: .status.healthStatus
       name: Health
+      type: string
+    - jsonPath: .status.message
+      name: Health Message
       type: string
     - jsonPath: .metadata.creationTimestamp
       name: Age
@@ -535,13 +538,6 @@ spec:
                       type: object
                     type: array
                 type: object
-              configuration:
-                properties:
-                  name:
-                    default: ""
-                    type: string
-                type: object
-                x-kubernetes-map-type: atomic
               containerSecurityContext:
                 properties:
                   allowPrivilegeEscalation:
@@ -1385,15 +1381,11 @@ spec:
                 additionalProperties:
                   type: string
                 type: object
-              objectStore:
-                properties:
-                  name:
-                    default: ""
-                    type: string
-                type: object
-                x-kubernetes-map-type: atomic
               priorityClassName:
                 type: string
+              replicas:
+                format: int32
+                type: integer
               resources:
                 properties:
                   claims:
@@ -1427,8 +1419,6 @@ spec:
                       x-kubernetes-int-or-string: true
                     type: object
                 type: object
-              runtimeClassName:
-                type: string
               schedulerName:
                 type: string
               securityContext:
@@ -1508,47 +1498,26 @@ spec:
                         type: string
                     type: object
                 type: object
+              service:
+                properties:
+                  annotations:
+                    additionalProperties:
+                      type: string
+                    type: object
+                  labels:
+                    additionalProperties:
+                      type: string
+                    type: object
+                  nodePort:
+                    format: int32
+                    type: integer
+                  serviceExternalTrafficPolicy:
+                    type: string
+                  serviceType:
+                    type: string
+                type: object
               serviceAccountName:
                 type: string
-              services:
-                properties:
-                  console:
-                    properties:
-                      annotations:
-                        additionalProperties:
-                          type: string
-                        type: object
-                      labels:
-                        additionalProperties:
-                          type: string
-                        type: object
-                      nodePort:
-                        format: int32
-                        type: integer
-                      serviceExternalTrafficPolicy:
-                        type: string
-                      serviceType:
-                        type: string
-                    type: object
-                  objectStore:
-                    properties:
-                      annotations:
-                        additionalProperties:
-                          type: string
-                        type: object
-                      labels:
-                        additionalProperties:
-                          type: string
-                        type: object
-                      nodePort:
-                        format: int32
-                        type: integer
-                      serviceExternalTrafficPolicy:
-                        type: string
-                      serviceType:
-                        type: string
-                    type: object
-                type: object
               sideCars:
                 properties:
                   containers:
@@ -3316,8 +3285,6 @@ spec:
                   - whenUnsatisfiable
                   type: object
                 type: array
-            required:
-            - configuration
             type: object
           status:
             properties:
@@ -3328,18 +3295,18 @@ spec:
                 type: string
               healthStatus:
                 type: string
-              numberPending:
+              message:
+                type: string
+              podsCrashing:
                 format: int32
                 type: integer
-              numberReady:
+              podsPending:
                 format: int32
                 type: integer
-              numberUnavailable:
+              podsRunning:
                 format: int32
                 type: integer
             type: object
-        required:
-        - spec
         type: object
     served: true
     storage: true

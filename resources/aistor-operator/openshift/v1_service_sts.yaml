@@ -6,7 +6,7 @@ metadata:
     aistor.min.io/authors: MinIO, Inc.
     aistor.min.io/license: Enterprise
     aistor.min.io/support: https://subnet.min.io
-    aistor.min.io/version: RELEASE.2024-10-24T06-18-32Z
+    aistor.min.io/version: RELEASE.2024-11-13T09-02-52Z
     service.beta.openshift.io/serving-cert-secret-name: sts-tls
   name: sts
   namespace: aistor

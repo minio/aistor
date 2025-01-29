@@ -5,7 +5,7 @@ metadata:
     aistor.min.io/authors: MinIO, Inc.
     aistor.min.io/license: Enterprise
     aistor.min.io/support: https://subnet.min.io
-    aistor.min.io/version: RELEASE.2024-10-24T06-18-32Z
+    aistor.min.io/version: RELEASE.2024-11-13T09-02-52Z
   name: object-store-operator
   namespace: aistor
 spec:
@@ -21,7 +21,7 @@ spec:
         aistor.min.io/authors: MinIO, Inc.
         aistor.min.io/license: Enterprise
         aistor.min.io/support: https://subnet.min.io
-        aistor.min.io/version: RELEASE.2024-10-24T06-18-32Z
+        aistor.min.io/version: RELEASE.2024-11-13T09-02-52Z
       labels:
         aistor.min.io/name: object-store-operator
     spec:
@@ -45,7 +45,7 @@ spec:
           value: object-store-operator
         - name: OPERATOR_STS_ENABLED
           value: "on"
-        image: quay.io/minio/aistor/operator:RELEASE.2024-10-24T06-18-32Z
+        image: quay.io/minio/aistor/operator:RELEASE.2025-01-24T23-41-07Z
         imagePullPolicy: IfNotPresent
         name: controller
         ports:
@@ -56,6 +56,7 @@ spec:
             cpu: 200m
             ephemeral-storage: 500Mi
             memory: 256Mi
+        securityContext: {}
         volumeMounts:
         - mountPath: /tmp/service-ca
           name: openshift-service-ca
@@ -65,7 +66,8 @@ spec:
           name: sts-tls
         - mountPath: /tmp/license
           name: minio-license
-      serviceAccountName: aistor
+      securityContext: {}
+      serviceAccountName: aistor-object-store
       volumes:
       - name: sts-tls
         projected:

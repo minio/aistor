@@ -5,7 +5,7 @@ metadata:
     aistor.min.io/authors: MinIO, Inc.
     aistor.min.io/license: Enterprise
     aistor.min.io/support: https://subnet.min.io
-    aistor.min.io/version: RELEASE.2024-10-24T06-18-32Z
+    aistor.min.io/version: RELEASE.2024-11-13T09-02-52Z
     controller-gen.kubebuilder.io/version: v0.16.3
   name: objectstores.aistor.min.io
 spec:
@@ -1044,8 +1044,6 @@ spec:
                           type: string
                         type: array
                     type: object
-                  enableSFTP:
-                    type: boolean
                 type: object
               firewall:
                 properties:
@@ -3823,6 +3821,13 @@ spec:
                         type: string
                     type: object
                 type: object
+              sftp:
+                properties:
+                  enabled:
+                    type: boolean
+                required:
+                - enabled
+                type: object
               sideCars:
                 properties:
                   containers:
@@ -5608,9 +5613,6 @@ spec:
             type: object
           status:
             properties:
-              availableReplicas:
-                format: int32
-                type: integer
               certificates:
                 nullable: true
                 properties:
@@ -5697,22 +5699,43 @@ spec:
                 type: string
               healthStatus:
                 type: string
+              licenseExpiration:
+                format: date-time
+                type: string
               pools:
                 items:
                   properties:
                     legacySecurityContext:
                       type: boolean
+                    name:
+                      type: string
+                    podStatus:
+                      properties:
+                        crashing:
+                          format: int32
+                          type: integer
+                        pending:
+                          format: int32
+                          type: integer
+                        running:
+                          format: int32
+                          type: integer
+                      type: object
                     ssName:
                       type: string
                     state:
                       type: string
                   required:
+                  - name
                   - ssName
                   - state
                   type: object
                 nullable: true
                 type: array
               revision:
+                format: int32
+                type: integer
+              setup:
                 format: int32
                 type: integer
               syncVersion:
@@ -5754,11 +5777,11 @@ spec:
                 format: int32
                 type: integer
             required:
-            - availableReplicas
             - certificates
             - currentState
             - pools
             - revision
+            - setup
             - syncVersion
             type: object
         required:
