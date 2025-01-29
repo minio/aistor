@@ -1,15 +1,11 @@
 # AIStor
 
-A unified management interface for all the MinIO Enterprise Store features:
+Hyperscale Object Store for AI
 
-- Observability
-- Key Management
-- Load Balancer
-- Firewall
-- Catalog
-- WARP
-- AdminJob
-- Operator
+MinIO AIStor is designed to allow enterprises to consolidate all of
+their data on a single, private cloud namespace. Architected using
+the same principles as the hyperscalers, AIStor delivers performance
+at scale at a fraction of the cost compared to the public cloud.
 
 AIStor runs in Kubernetes.
 

@@ -7,6 +7,6 @@ roleRef:
   kind: ClusterRole
   name: aistor-role
 subjects:
-  - kind: ServiceAccount
-    name: aistor-sa
-    namespace: aistor
+- kind: ServiceAccount
+  name: aistor-sa
+  namespace: aistor

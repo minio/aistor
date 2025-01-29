@@ -1,16 +1,16 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: aistor
-  namespace: aistor
   labels:
     aistor.min.io/name: aistor
+  name: aistor
+  namespace: aistor
 spec:
   ports:
-    - name: http
-      port: 8444
-    - name: control-plane
-      protocol: TCP
-      port: 7899
+  - name: http
+    port: 8444
+  - name: control-plane
+    port: 7899
+    protocol: TCP
   selector:
     aistor.min.io/name: aistor
