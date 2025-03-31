@@ -6,7 +6,7 @@ metadata:
     aistor.min.io/license: Enterprise
     aistor.min.io/support: https://subnet.min.io
     aistor.min.io/version: RELEASE.2024-11-13T09-02-52Z
-    controller-gen.kubebuilder.io/version: v0.16.3
+    controller-gen.kubebuilder.io/version: v0.17.2
   name: keymanagers.aistor.min.io
 spec:
   group: aistor.min.io
@@ -1396,11 +1396,13 @@ spec:
                   type: string
                 type: object
               podManagementPolicy:
+                default: Parallel
                 type: string
               priorityClassName:
                 type: string
               replicas:
                 format: int32
+                minimum: 1
                 type: integer
               resources:
                 properties:
@@ -1463,6 +1465,8 @@ spec:
                   runAsUser:
                     format: int64
                     type: integer
+                  seLinuxChangePolicy:
+                    type: string
                   seLinuxOptions:
                     properties:
                       level:

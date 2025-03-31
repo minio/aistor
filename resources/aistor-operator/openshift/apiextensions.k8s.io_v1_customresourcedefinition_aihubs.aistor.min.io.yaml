@@ -6,7 +6,7 @@ metadata:
     aistor.min.io/license: Enterprise
     aistor.min.io/support: https://subnet.min.io
     aistor.min.io/version: RELEASE.2024-11-13T09-02-52Z
-    controller-gen.kubebuilder.io/version: v0.16.3
+    controller-gen.kubebuilder.io/version: v0.17.2
   name: aihubs.aistor.min.io
 spec:
   group: aistor.min.io
@@ -766,6 +766,8 @@ spec:
                   runAsUser:
                     format: int64
                     type: integer
+                  seLinuxChangePolicy:
+                    type: string
                   seLinuxOptions:
                     properties:
                       level:

@@ -11,6 +11,8 @@ resources:
 - apiextensions.k8s.io_v1_customresourcedefinition_observes.aistor.min.io.yaml
 - apiextensions.k8s.io_v1_customresourcedefinition_policybindings.sts.min.io.yaml
 - apiextensions.k8s.io_v1_customresourcedefinition_prompts.aistor.min.io.yaml
+- apiextensions.k8s.io_v1_customresourcedefinition_serviceconfigurations.aistor.min.io.yaml
+- apiextensions.k8s.io_v1_customresourcedefinition_serviceregistries.aistor.min.io.yaml
 - apiextensions.k8s.io_v1_customresourcedefinition_warps.aistor.min.io.yaml
 - apps_v1_deployment_aihub-operator.yaml
 - apps_v1_deployment_catalog-operator.yaml
@@ -27,6 +29,7 @@ resources:
 - v1_namespace_aistor.yaml
 - v1_service_object-store-operator.yaml
 - v1_service_sts.yaml
+- v1_serviceaccount_aistor-adminjob.yaml
 - v1_serviceaccount_aistor-aihub.yaml
 - v1_serviceaccount_aistor-catalog.yaml
 - v1_serviceaccount_aistor-inference.yaml
@@ -36,4 +39,3 @@ resources:
 - v1_serviceaccount_aistor-observe.yaml
 - v1_serviceaccount_aistor-prompt.yaml
 - v1_serviceaccount_aistor-warp.yaml
-- v1_serviceaccount_aistor.yaml

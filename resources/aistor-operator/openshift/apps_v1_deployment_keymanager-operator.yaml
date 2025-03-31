@@ -43,7 +43,7 @@ spec:
         env:
         - name: MINIO_OPERATOR_DEPLOYMENT_NAME
           value: keymanager-operator
-        image: quay.io/minio/aistor/operator:RELEASE.2025-01-24T23-41-07Z
+        image: quay.io/minio/aistor/operator:RELEASE.2025-03-31T15-04-57Z
         imagePullPolicy: IfNotPresent
         name: controller
         resources:
