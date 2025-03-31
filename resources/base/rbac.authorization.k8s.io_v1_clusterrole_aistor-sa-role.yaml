@@ -66,6 +66,7 @@ rules:
   resources:
   - storageclasses
   verbs:
+  - delete
   - get
   - watch
   - create
@@ -281,3 +282,15 @@ rules:
   - serviceaccounts
   verbs:
   - '*'
+- apiGroups:
+  - nvidia.com
+  resources:
+  - clusterpolicies
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - delete
+  - patch

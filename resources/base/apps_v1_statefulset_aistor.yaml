@@ -26,7 +26,7 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: spec.nodeName
-        image: quay.io/minio/aistor:RELEASE.2025-01-28T19-50-23Z
+        image: quay.io/minio/aistor:RELEASE.2025-03-31T15-10-54Z
         imagePullPolicy: Always
         name: console
         ports:
