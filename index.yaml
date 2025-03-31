@@ -1,0 +1,71 @@
+apiVersion: v1
+entries:
+  aistor:
+  - apiVersion: v2
+    appVersion: 2025.3.31151054
+    created: "2025-03-31T10:01:34.980276-07:00"
+    description: Helm chart for MinIO AIStor
+    digest: 4a19d6b5c0ecff4c8f8936d22df93eeae6f2650e28eb51166b6e5b7adb20e928
+    home: https://min.io
+    icon: https://min.io/resources/img/logo/MINIO_wordmark.png
+    keywords:
+    - Enterprise Object Storage
+    - storage
+    - object-storage
+    - S3
+    maintainers:
+    - email: dev@minio.io
+      name: MinIO, Inc
+    name: aistor
+    sources:
+    - https://min.io/product/aistor-overview
+    type: application
+    urls:
+    - https://aistor.min.io/helm-releases/aistor-2025.3.31151054.tgz
+    version: 2025.3.31151054
+  aistor-crd:
+  - apiVersion: v2
+    appVersion: 2025.1.28195023
+    created: "2025-03-31T10:01:34.984103-07:00"
+    description: Helm chart for MinIO AIStor CRDs
+    digest: 00880bf5c2a0aef20a2bdf5aa788a4323c4d0277072bdb6bcb176d17da91b83c
+    home: https://min.io
+    icon: https://min.io/resources/img/logo/MINIO_wordmark.png
+    keywords:
+    - Enterprise Object Storage
+    - storage
+    - object-storage
+    - S3
+    maintainers:
+    - email: dev@minio.io
+      name: MinIO, Inc
+    name: aistor-crd
+    sources:
+    - https://min.io/product/aistor-overview
+    type: application
+    urls:
+    - https://aistor.min.io/helm-releases/aistor-crd-2025.1.28195023.tgz
+    version: 2025.1.28195023
+  object-store:
+  - apiVersion: v2
+    appVersion: v20240817012454.0.0
+    created: "2025-03-31T10:01:34.984803-07:00"
+    description: Helm chart for MinIO AIStor Object Store
+    digest: fafa7d8ff2090b10f5d33f946f755fc1c180ef45e9f3a9a4af8ef28218be69f6
+    home: https://min.io
+    icon: https://min.io/resources/img/logo/MINIO_wordmark.png
+    keywords:
+    - storage
+    - object-storage
+    - S3
+    maintainers:
+    - email: dev@minio.io
+      name: MinIO, Inc
+    name: object-store
+    sources:
+    - https://github.com/minio/aistor
+    type: application
+    urls:
+    - https://aistor.min.io/helm-releases/object-store-20240821200553.0.0.tgz
+    version: 20240821200553.0.0
+generated: "2025-03-31T10:01:34.979532-07:00"
