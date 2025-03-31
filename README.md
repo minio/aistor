@@ -33,6 +33,12 @@ Other Kubernetes providers may also work.
    ```shell
    kubectl apply -k https://min.io/k8s/aistor
    ```
+   
+or install with helm
+   ```shell
+   helm repo add aistor https://aistor.min.io/
+   helm install --namespace aistor --create-namespace aistor aistor/aistor
+   ```
 
 2. Use `kubectl proxy` to port forward the AIStor Console to access the User Interface
 
