@@ -37,7 +37,8 @@ Other Kubernetes providers may also work.
 or install with helm
    ```shell
    helm repo add aistor https://aistor.min.io/
-   helm install --namespace aistor --create-namespace aistor aistor/aistor
+   helm install aistor-crd aistor/aistor-crd
+   helm install --namespace aistor --create-namespace aistor aistor/aistor --set global.license=<your-license-key>
    ```
 
 2. Use `kubectl proxy` to port forward the AIStor Console to access the User Interface
