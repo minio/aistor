@@ -1,6 +1,25 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
+- aistor.min.io_v1alpha1_serviceconfiguration_aihub.yaml
+- aistor.min.io_v1alpha1_serviceconfiguration_catalog.yaml
+- aistor.min.io_v1alpha1_serviceconfiguration_firewall.yaml
+- aistor.min.io_v1alpha1_serviceconfiguration_inference.yaml
+- aistor.min.io_v1alpha1_serviceconfiguration_kes-sidecar.yaml
+- aistor.min.io_v1alpha1_serviceconfiguration_kes.yaml
+- aistor.min.io_v1alpha1_serviceconfiguration_keymanager.yaml
+- aistor.min.io_v1alpha1_serviceconfiguration_kms-sidecar.yaml
+- aistor.min.io_v1alpha1_serviceconfiguration_mc.yaml
+- aistor.min.io_v1alpha1_serviceconfiguration_minio-sidecar.yaml
+- aistor.min.io_v1alpha1_serviceconfiguration_minio.yaml
+- aistor.min.io_v1alpha1_serviceconfiguration_minwall.yaml
+- aistor.min.io_v1alpha1_serviceconfiguration_observe-db.yaml
+- aistor.min.io_v1alpha1_serviceconfiguration_observe.yaml
+- aistor.min.io_v1alpha1_serviceconfiguration_prompt.yaml
+- aistor.min.io_v1alpha1_serviceconfiguration_warp.yaml
+- aistor.min.io_v1alpha1_serviceregistry_aistor.yaml
+- aistor.min.io_v1alpha1_serviceregistry_minio.yaml
+- aistor.min.io_v1alpha1_serviceregistry_prometheus.yaml
 - apiextensions.k8s.io_v1_customresourcedefinition_adminjobs.aistor.min.io.yaml
 - apiextensions.k8s.io_v1_customresourcedefinition_aihubs.aistor.min.io.yaml
 - apiextensions.k8s.io_v1_customresourcedefinition_catalogs.aistor.min.io.yaml

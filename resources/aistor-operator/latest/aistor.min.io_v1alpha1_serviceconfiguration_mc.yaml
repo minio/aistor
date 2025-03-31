@@ -1,0 +1,13 @@
+apiVersion: aistor.min.io/v1alpha1
+kind: ServiceConfiguration
+metadata:
+  annotations:
+    aistor.min.io/authors: MinIO, Inc.
+    aistor.min.io/license: Enterprise
+    aistor.min.io/support: https://subnet.min.io
+  name: mc
+  namespace: aistor
+spec:
+  image: mc:RELEASE.2025-03-29T19-32-50Z
+  registry:
+    name: aistor
