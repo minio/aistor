@@ -39,3 +39,6 @@ subjects:
 - kind: ServiceAccount
   name: aistor-warp
   namespace: aistor
+- kind: ServiceAccount
+  name: aistor-adminjob
+  namespace: aistor

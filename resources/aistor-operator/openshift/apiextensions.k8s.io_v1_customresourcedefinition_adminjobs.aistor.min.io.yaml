@@ -6,7 +6,7 @@ metadata:
     aistor.min.io/license: Enterprise
     aistor.min.io/support: https://subnet.min.io
     aistor.min.io/version: RELEASE.2024-11-13T09-02-52Z
-    controller-gen.kubebuilder.io/version: v0.16.3
+    controller-gen.kubebuilder.io/version: v0.17.2
   name: adminjobs.aistor.min.io
 spec:
   group: aistor.min.io
@@ -1079,6 +1079,7 @@ spec:
                     type: object
                 type: object
               execution:
+                default: sequential
                 enum:
                 - parallel
                 - sequential
@@ -1132,6 +1133,8 @@ spec:
                   runAsUser:
                     format: int64
                     type: integer
+                  seLinuxChangePolicy:
+                    type: string
                   seLinuxOptions:
                     properties:
                       level:
@@ -1195,6 +1198,9 @@ spec:
             - objectStore
             - serviceAccountName
             type: object
+            x-kubernetes-validations:
+            - message: can only use 'dependsOn' when 'execution' is set to 'parallel'
+              rule: self.execution == 'parallel' || self.commands.all(c, !has(c.dependsOn))
           status:
             properties:
               commands:
@@ -1204,8 +1210,6 @@ spec:
                       type: string
                     name:
                       type: string
-                    podName:
-                      type: string
                     result:
                       type: string
                   required:
@@ -1213,6 +1217,9 @@ spec:
                   type: object
                 type: array
               error:
+                type: string
+              lastStatusUpdate:
+                format: date-time
                 type: string
               phase:
                 type: string

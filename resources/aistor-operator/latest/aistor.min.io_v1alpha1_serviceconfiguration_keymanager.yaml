@@ -1,10 +1,13 @@
-apiVersion: v1
-kind: ServiceAccount
+apiVersion: aistor.min.io/v1alpha1
+kind: ServiceConfiguration
 metadata:
   annotations:
     aistor.min.io/authors: MinIO, Inc.
     aistor.min.io/license: Enterprise
     aistor.min.io/support: https://subnet.min.io
-    aistor.min.io/version: RELEASE.2024-10-24T06-18-32Z
-  name: aistor
+  name: keymanager
   namespace: aistor
+spec:
+  image: minkms:RELEASE.2025-03-24T19-33-06Z
+  registry:
+    name: aistor

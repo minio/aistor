@@ -5,8 +5,8 @@ metadata:
     aistor.min.io/authors: MinIO, Inc.
     aistor.min.io/license: Enterprise
     aistor.min.io/support: https://subnet.min.io
-    aistor.min.io/version: RELEASE.2025-01-24T23-41-07Z
-    controller-gen.kubebuilder.io/version: v0.16.3
+    aistor.min.io/version: RELEASE.2025-03-31T15-04-57Z
+    controller-gen.kubebuilder.io/version: v0.17.2
   name: inferences.aistor.min.io
 spec:
   group: aistor.min.io
@@ -1445,6 +1445,8 @@ spec:
                   runAsUser:
                     format: int64
                     type: integer
+                  seLinuxChangePolicy:
+                    type: string
                   seLinuxOptions:
                     properties:
                       level:
