@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    aistor.min.io/name: object-store-operator
+  name: object-store-operator
+  namespace: aistor
+spec:
+  ports:
+  - name: http
+    port: 4221
+  selector:
+    aistor.min.io/name: object-store-operator
+    operator: leader
+  type: ClusterIP

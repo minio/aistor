@@ -1,0 +1,7 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- apiextensions.k8s.io_v1_customresourcedefinition_observes.aistor.min.io.yaml
+- apps_v1_deployment_observe-operator.yaml
+- rbac.authorization.k8s.io_v1_clusterrolebinding_aistor-observe-binding.yaml
+- v1_serviceaccount_aistor-observe.yaml
