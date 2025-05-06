@@ -1,0 +1,75 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aihub-operator
+  namespace: aistor
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      aistor.min.io/name: aihub-operator
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        aistor.min.io/name: aihub-operator
+    spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: aistor.min.io/name
+                operator: In
+                values:
+                - aihub-operator
+            topologyKey: kubernetes.io/hostname
+      containers:
+      - args:
+        - aihub
+        - -license
+        - /tmp/license/minio.license
+        env:
+        - name: MINIO_OPERATOR_DEPLOYMENT_NAME
+          value: aihub-operator
+        image: quay.io/minio/aistor/operator:RELEASE.2025-05-02T17-21-36Z
+        imagePullPolicy: IfNotPresent
+        name: controller
+        resources:
+          requests:
+            cpu: 200m
+            ephemeral-storage: 500Mi
+            memory: 256Mi
+        volumeMounts:
+        - mountPath: /tmp/service-ca
+          name: openshift-service-ca
+        - mountPath: /tmp/csr-signer-ca
+          name: openshift-csr-signer-ca
+        - mountPath: /tmp/license
+          name: minio-license
+      securityContext: {}
+      serviceAccountName: aistor-aihub
+      volumes:
+      - configMap:
+          items:
+          - key: service-ca.crt
+            path: service-ca.crt
+          name: openshift-service-ca.crt
+          optional: true
+        name: openshift-service-ca
+      - name: openshift-csr-signer-ca
+        projected:
+          defaultMode: 420
+          sources:
+          - secret:
+              items:
+              - key: tls.crt
+                path: tls.crt
+              name: openshift-csr-signer-ca
+              optional: true
+      - name: minio-license
+        secret:
+          defaultMode: 444
+          optional: true
+          secretName: minio-license

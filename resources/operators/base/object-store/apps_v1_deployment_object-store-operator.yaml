@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: object-store-operator
+  namespace: aistor
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      aistor.min.io/name: object-store-operator
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        aistor.min.io/name: object-store-operator
+    spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: aistor.min.io/name
+                operator: In
+                values:
+                - object-store-operator
+            topologyKey: kubernetes.io/hostname
+      containers:
+      - args:
+        - controller
+        - -license
+        - /tmp/license/minio.license
+        env:
+        - name: MINIO_OPERATOR_DEPLOYMENT_NAME
+          value: object-store-operator
+        - name: OPERATOR_STS_ENABLED
+          value: "on"
+        image: quay.io/minio/aistor/operator:RELEASE.2025-05-02T17-21-36Z
+        imagePullPolicy: IfNotPresent
+        name: controller
+        ports:
+        - containerPort: 4223
+          protocol: TCP
+        resources:
+          requests:
+            cpu: 200m
+            ephemeral-storage: 500Mi
+            memory: 256Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          runAsGroup: 1000
+          runAsNonRoot: true
+          runAsUser: 1000
+          seccompProfile:
+            type: RuntimeDefault
+        volumeMounts:
+        - mountPath: /tmp/license
+          name: minio-license
+      serviceAccountName: aistor-object-store
+      volumes:
+      - name: minio-license
+        secret:
+          defaultMode: 444
+          optional: true
+          secretName: minio-license
