@@ -40,7 +40,7 @@ done
 
 helm package ~/github.com/miniohq/aistor/helm/aistor -d helm-releases
 helm package ~/github.com/miniohq/aistor/helm/object-store -d helm-releases
-helm reindex aistor.min.io
+helm repo index --merge index.yaml --url https://aistor.min.io .
 
 git add -A
 git commit -m "operators-release-${RELEASE_TAG}"
