@@ -26,9 +26,10 @@ entries:
   - apiVersion: v2
     appVersion: v20250411230718.0.0
     created: "2025-05-06T10:32:27.965306669-07:00"
-    description: Helm chart for MinIO AIStor
+    description: (Deprecated) Helm chart for MinIO AIStor
     digest: 73bb27156a059abaf14e60d8bf48d660fa54ab352f9a1d57b2e3129ef957a9e8
     home: https://min.io
+    deprecated: true
     icon: https://min.io/resources/img/logo/MINIO_wordmark.png
     keywords:
     - Enterprise Object Storage
@@ -48,9 +49,10 @@ entries:
   - apiVersion: v2
     appVersion: v20250331151054.0.0
     created: "2025-05-06T10:32:27.96468609-07:00"
-    description: Helm chart for MinIO AIStor
+    description: (Deprecated) Helm chart for MinIO AIStor
     digest: be14ded5d0bfe8f66d7c45b0f3432d6409706decbf5a3c6a1043816ae5103df7
     home: https://min.io
+    deprecated: true
     icon: https://min.io/resources/img/logo/MINIO_wordmark.png
     keywords:
     - Enterprise Object Storage
@@ -71,9 +73,10 @@ entries:
   - apiVersion: v2
     appVersion: v20250411230718.0.0
     created: "2025-05-06T10:32:27.976970123-07:00"
-    description: Helm chart for MinIO AIStor CRDs
+    description: (Deprecated) Helm chart for MinIO AIStor CRDs
     digest: b94199cffcf79718fa85247cbfe701d60acd29b5a9e0ac09a60e672b38fb8ef3
     home: https://min.io
+    deprecated: true
     icon: https://min.io/resources/img/logo/MINIO_wordmark.png
     keywords:
     - Enterprise Object Storage
@@ -93,7 +96,7 @@ entries:
   - apiVersion: v2
     appVersion: v20250128195023.0.0
     created: "2025-05-06T10:32:27.973353375-07:00"
-    description: Helm chart for MinIO AIStor CRDs
+    description: (Deprecated) Helm chart for MinIO AIStor CRDs
     digest: d7f9ed3d18b52818a65fd28b5afa34838e06bfd0cae7af98c5f19e0c253d5b6a
     home: https://min.io
     icon: https://min.io/resources/img/logo/MINIO_wordmark.png
@@ -118,6 +121,7 @@ entries:
     description: Helm chart for MinIO AIStor Object Store
     digest: 7e77472a48677c95c3f169999b64012108fe47dfeccf3bd4f2fe56de910fcc04
     home: https://min.io
+    deprecated: true
     icon: https://min.io/resources/img/logo/MINIO_wordmark.png
     keywords:
     - storage
