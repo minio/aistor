@@ -19,9 +19,7 @@ operators=(
 	"adminjob"
 	"aihub"
 	"keymanager"
-	"loadbalancer"
 	"object-store"
-	"observe"
 	"prompt"
 	"warp"
 )
