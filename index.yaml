@@ -138,7 +138,7 @@ entries:
   - apiVersion: v2
     created: "2025-05-13T14:10:44.887881485-07:00"
     description: Helm chart for MinIO AIStor Object Store
-    digest: 849b7cd782130884ae2ad8f841351ce91661dc1a5d5c54ca83fb99809245bf80
+    digest: 7e77472a48677c95c3f169999b64012108fe47dfeccf3bd4f2fe56de910fcc04
     home: https://min.io
     icon: https://min.io/resources/img/logo/MINIO_wordmark.png
     keywords:
