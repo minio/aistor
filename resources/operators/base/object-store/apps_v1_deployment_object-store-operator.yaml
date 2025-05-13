@@ -35,7 +35,7 @@ spec:
           value: object-store-operator
         - name: OPERATOR_STS_ENABLED
           value: "on"
-        image: quay.io/minio/aistor/operator:RELEASE.2025-05-02T17-21-36Z
+        image: quay.io/minio/aistor/operator:RELEASE.2025-05-12T19-09-07Z
         imagePullPolicy: IfNotPresent
         name: controller
         ports:
