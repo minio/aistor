@@ -33,7 +33,7 @@ spec:
         env:
         - name: MINIO_OPERATOR_DEPLOYMENT_NAME
           value: prompt-operator
-        image: quay.io/minio/aistor/operator:RELEASE.2025-05-02T17-21-36Z
+        image: quay.io/minio/aistor/operator:RELEASE.2025-05-12T19-09-07Z
         imagePullPolicy: IfNotPresent
         name: controller
         resources:

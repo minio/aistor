@@ -12,16 +12,13 @@ git checkout -b "$branch_name"
 rm -rf resources/aistor-operator/
 rm -rf resources/operators/
 rm -rf resources/base/
-rm -rf resources/eks/
-rm -rf resources/openshift/
+rm -rf resources/docs/
 
 operators=(
 	"adminjob"
 	"aihub"
 	"keymanager"
-	"loadbalancer"
 	"object-store"
-	"observe"
 	"prompt"
 	"warp"
 )
@@ -35,6 +32,10 @@ for operator in "${operators[@]}"; do
 	kustomize build "git@github.com/miniohq/aistor.git/resources/openshift/${operator}/?ref=${RELEASE_TAG}.operator&timeout=90s&submodules=false" -o "resources/operators/openshift/${operator}/"
 	(cd "resources/operators/openshift/${operator}" && kustomize create --autodetect)
 done
+
+# Copy API docs
+
+cp -r ~/github.com/miniohq/aistor/operator/docs/api docs
 
 # Package helm charts from a local directory for now
 
