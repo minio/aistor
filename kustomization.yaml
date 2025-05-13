@@ -7,8 +7,6 @@ resources:
   - resources/operators/base/adminjob
   - resources/operators/base/aihub
   - resources/operators/base/keymanager
-  - resources/operators/base/loadbalancer
   - resources/operators/base/object-store
-  - resources/operators/base/observe
   - resources/operators/base/prompt
   - resources/operators/base/warp
