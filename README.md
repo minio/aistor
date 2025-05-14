@@ -51,7 +51,7 @@ kubectl apply --server-side -k https://min.io/k8s/aistor/resources/operators/bas
 # 4) Install AIStor AIHub Operator
 kubectl apply --server-side -k https://min.io/k8s/aistor/resources/operators/base/aihub
 
-# 5) Install AIStor AdminJob Operator
+# 5) Install AIStor Key Manager Operator
 kubectl apply --server-side -k https://min.io/k8s/aistor/resources/operators/base/keymanager
 
 # 6) Install AIStor Prompt Operator
@@ -86,7 +86,27 @@ kubectl apply --server-side -f  license.yaml
 
 ### Install with helm
 
+Add the Helm chart repository and install the AIStor chart.
+
 ```shell
 helm repo add aistor https://aistor.min.io/
 helm install --namespace aistor --create-namespace aistor aistor/aistor --set global.license=<your-license-key>
 ```
+
+Now you are ready to create you own AIStor object store, get the values.yaml file from the chart and edit it to your needs.
+
+```shell
+helm show values aistor/object-store > values.yaml
+```
+
+Finally, create the object store with the following command:
+
+```shell
+helm install my-objectstore aistor/object-store -n my-objectstore --create-namespace -f values.yaml 
+```
+
+### Help and support
+
+CRD's fields docs are available in the [docs](docs/) folder.
+
+For help and support open a ticket in SUBNET https://subnet.min.io/.
