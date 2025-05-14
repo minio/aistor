@@ -43,24 +43,23 @@ Or install one AIStor operator selectively
 kubectl apply --server-side -f https://raw.githubusercontent.com/minio/aistor/master/resources/namespace.yaml
 
 # 2) Install AIStor Object Store Operator
-kubectl apply --server-side -k https://min.io/k8s/aistor/resorces/operators/base/object-store
+kubectl apply --server-side -k https://min.io/k8s/aistor/resources/operators/base/object-store
 
 # 3) Install AIStor AdminJob Operator
-kubectl apply --server-side -k https://min.io/k8s/aistor/resorces/operators/base/adminjob
+kubectl apply --server-side -k https://min.io/k8s/aistor/resources/operators/base/adminjob
 
 # 4) Install AIStor AIHub Operator
-kubectl apply --server-side -k https://min.io/k8s/aistor/resorces/operators/base/aihub
+kubectl apply --server-side -k https://min.io/k8s/aistor/resources/operators/base/aihub
 
 # 5) Install AIStor AdminJob Operator
-kubectl apply --server-side -k https://min.io/k8s/aistor/resorces/operators/base/keymanager
+kubectl apply --server-side -k https://min.io/k8s/aistor/resources/operators/base/keymanager
 
 # 6) Install AIStor Prompt Operator
-kubectl apply --server-side -k https://min.io/k8s/aistor/resorces/operators/base/prompt
+kubectl apply --server-side -k https://min.io/k8s/aistor/resources/operators/base/prompt
 
 # 7) Install AIStor WARP Operator
-kubectl apply --server-side -k https://min.io/k8s/aistor/resorces/operators/base/warp
+kubectl apply --server-side -k https://min.io/k8s/aistor/resources/operators/base/warp
 ```
-
 
 ### Where to get a license?
 
@@ -68,7 +67,7 @@ For customers, you can get the license from https://subnet.min.io/.
 
 If you register to [Minio subscription learning platform](https://min.io/training#training-nav) you get a [60 days trial license](https://min.io/training/learningsubscription?ref=blog.min.io#subscription-trial-license).
 
-Finally, create a license secret for AIStor, edit the file in [license.yaml](resources/license.yaml) and include the AIStor license to it.
+Finally, create a license secret for AIStor to enable the operators, edit the file in [license.yaml](resources/license.yaml) and include the AIStor license to it.
 
 ```yaml
 apiVersion: v1
