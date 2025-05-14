@@ -1,0 +1,8 @@
+apiVersion: v1
+data:
+  minio.license: <base 64 encoded license here>
+kind: Secret
+metadata:
+  name: minio-license
+  namespace: aistor
+type: Opaque
