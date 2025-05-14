@@ -107,6 +107,6 @@ helm install my-objectstore aistor/object-store -n my-objectstore --create-names
 
 ### Help and support
 
-CRD's fields docs are available in the [docs](docs/) folder.
+CRD's fields docs are available in the [docs](https://github.com/minio/aistor/tree/master/docs) folder.
 
 For help and support open a ticket in SUBNET https://subnet.min.io/.
