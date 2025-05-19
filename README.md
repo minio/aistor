@@ -105,6 +105,29 @@ Finally, create the object store with the following command:
 helm install my-objectstore aistor/object-store -n my-objectstore --create-namespace -f values.yaml 
 ```
 
+### Install in Openshift Operator Hub
+
+You can also install the AIStor operators from the Openshift Operator Hub.
+
+#### Install the AIStor Object Store Operator Bundle
+
+The Object Store Operator bundle includes the following Operators:
+
+* AIStor Object Store Operator
+* AIStor AdminJob Operator
+
+As part of the Bundle installation, the following Custom Resource Definitions (CRDs) are installed:
+
+* AIStor ObjectStore
+* AIStor AdminJob
+* AIStor PolicyBinding
+
+To Install the AIStor Object Store Operator Bundle, follow these steps:
+
+```shell
+oc apply -f https://raw.githubusercontent.com/minio/aistor/master/resources/OperatorHub/ObjectStore/Subscription.yaml
+```
+
 ### Help and support
 
 CRD's fields docs are available in the [docs](https://github.com/minio/aistor/tree/master/docs) folder.
