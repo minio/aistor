@@ -3,7 +3,7 @@ entries:
   aistor:
   - apiVersion: v2
     appVersion: v20250512190907.0.0
-    created: "2025-05-13T14:10:44.879865886-07:00"
+    created: "2025-05-20T14:58:25.247241-07:00"
     description: Helm chart for MinIO AIStor
     digest: 2ed03c52cbd642dfe8ad07cdfa4453b0e8f3ff8e7ca970f93a744d19aac2fbdf
     home: https://min.io
@@ -25,7 +25,7 @@ entries:
     version: 3.0.0
   - apiVersion: v2
     appVersion: v20250502172136.0.0
-    created: "2025-05-13T14:10:44.877777212-07:00"
+    created: "2025-05-20T14:58:25.244729-07:00"
     description: Helm chart for MinIO AIStor
     digest: 1a6e0e7ad51ec71d83369845fcff52ef9bb58b7f7929b72fc8018f509ea7abe9
     home: https://min.io
@@ -47,7 +47,7 @@ entries:
     version: 2.0.0
   - apiVersion: v2
     appVersion: v20250411230718.0.0
-    created: "2025-05-13T14:10:44.87240955-07:00"
+    created: "2025-05-20T14:58:25.240679-07:00"
     description: Helm chart for MinIO AIStor
     digest: 73bb27156a059abaf14e60d8bf48d660fa54ab352f9a1d57b2e3129ef957a9e8
     home: https://min.io
@@ -69,7 +69,7 @@ entries:
     version: 1.0.1
   - apiVersion: v2
     appVersion: v20250331151054.0.0
-    created: "2025-05-13T14:10:44.871918964-07:00"
+    created: "2025-05-20T14:58:25.239971-07:00"
     description: Helm chart for MinIO AIStor
     digest: be14ded5d0bfe8f66d7c45b0f3432d6409706decbf5a3c6a1043816ae5103df7
     home: https://min.io
@@ -92,7 +92,7 @@ entries:
   aistor-crd:
   - apiVersion: v2
     appVersion: v20250411230718.0.0
-    created: "2025-05-13T14:10:44.886297454-07:00"
+    created: "2025-05-20T14:58:25.252735-07:00"
     description: Helm chart for MinIO AIStor CRDs
     digest: b94199cffcf79718fa85247cbfe701d60acd29b5a9e0ac09a60e672b38fb8ef3
     home: https://min.io
@@ -114,7 +114,7 @@ entries:
     version: 1.0.1
   - apiVersion: v2
     appVersion: v20250128195023.0.0
-    created: "2025-05-13T14:10:44.882526671-07:00"
+    created: "2025-05-20T14:58:25.249987-07:00"
     description: Helm chart for MinIO AIStor CRDs
     digest: d7f9ed3d18b52818a65fd28b5afa34838e06bfd0cae7af98c5f19e0c253d5b6a
     home: https://min.io
@@ -134,9 +134,30 @@ entries:
     urls:
     - https://aistor.min.io/helm-releases/aistor-crd-1.0.0.tgz
     version: 1.0.0
+  keymanager:
+  - apiVersion: v2
+    appVersion: v20250411230718.0.0
+    created: "2025-05-20T14:58:25.253288-07:00"
+    description: Helm chart for MinIO AIStor Key Manager
+    digest: 25ccac60186f03fb0deb016e1babac2d9ac8ec05573d47dc1da3a041bc90a0df
+    home: https://min.io
+    icon: https://min.io/resources/img/logo/MINIO_wordmark.png
+    keywords:
+    - key-manager
+    - kms
+    maintainers:
+    - email: dev@minio.io
+      name: MinIO, Inc
+    name: keymanager
+    sources:
+    - https://github.com/minio/aistor
+    type: application
+    urls:
+    - https://aistor.min.io/helm-releases/keymanager-1.0.0.tgz
+    version: 1.0.0
   object-store:
   - apiVersion: v2
-    created: "2025-05-13T14:10:44.887881485-07:00"
+    created: "2025-05-20T14:58:25.255396-07:00"
     description: Helm chart for MinIO AIStor Object Store
     digest: 7e77472a48677c95c3f169999b64012108fe47dfeccf3bd4f2fe56de910fcc04
     home: https://min.io
@@ -157,7 +178,7 @@ entries:
     version: 1.0.2
   - apiVersion: v2
     appVersion: v20250411230718.0.0
-    created: "2025-05-13T14:10:44.887482112-07:00"
+    created: "2025-05-20T14:58:25.254676-07:00"
     description: Helm chart for MinIO AIStor Object Store
     digest: f202428c4545ca2953ccdf5e20a811fba174daf47e35644462813bc2ff24a419
     home: https://min.io
@@ -178,7 +199,7 @@ entries:
     version: 1.0.1
   - apiVersion: v2
     appVersion: v20240817012454.0.0
-    created: "2025-05-13T14:10:44.886882676-07:00"
+    created: "2025-05-20T14:58:25.253987-07:00"
     description: Helm chart for MinIO AIStor Object Store
     digest: a7176d58c6a8a2311297a707d653595751f31bb7dd29c7c6ae91e70c06ea19d8
     home: https://min.io
@@ -197,4 +218,4 @@ entries:
     urls:
     - https://aistor.min.io/helm-releases/object-store-1.0.0.tgz
     version: 1.0.0
-generated: "2025-05-13T14:10:44.87130777-07:00"
+generated: "2025-05-20T14:58:25.239107-07:00"

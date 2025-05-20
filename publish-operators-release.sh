@@ -41,6 +41,7 @@ cp -r ~/github.com/miniohq/aistor/operator/docs/api docs
 
 helm package ~/github.com/miniohq/aistor/helm/aistor -d helm-releases
 helm package ~/github.com/miniohq/aistor/helm/object-store -d helm-releases
+helm package ~/github.com/miniohq/aistor/helm/keymanager -d helm-releases
 helm repo index --merge index.yaml --url https://aistor.min.io .
 
 git add -A
