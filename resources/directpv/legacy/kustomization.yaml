@@ -1,0 +1,25 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - ../base
+  - CSIDriver.yaml
+  - DaemonSet.yaml
+  - Deployment.yaml
+  - StorageClass.yaml
+
+images:
+  - name: quay.io/minio/directpv
+    newTag: v5.0.0
+
+  - name: quay.io/minio/csi-node-driver-registrar
+    digest: sha256:8f00013a19bd3bea021f3e96b093814fb110b383c0fd050d2a5309afb0ed0ccb
+
+  - name: quay.io/minio/livenessprobe
+    digest: sha256:d8f7d431a2a148970dcb337f24b265d173bcee58bbeeae9af7ae60f01ce49be2
+
+  - name: quay.io/minio/csi-provisioner
+    digest: sha256:24816a743663d153060f0c3fc30005f05bea23c8b0fd2551fd667042741e8562
+
+  - name: quay.io/minio/csi-resizer
+    digest: sha256:fc0c1f9cbc0ebb16283c0e425c031041eedb0e8ebbe6a1adec3de41584548ce6
