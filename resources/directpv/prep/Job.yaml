@@ -1,0 +1,79 @@
+
+apiVersion: batch/v1
+kind: Job
+metadata:
+  labels:
+    directpv.min.io/created-by: prep
+    directpv.min.io/version: v1beta1
+  name: prep
+  namespace: directpv
+spec:
+  ttlSecondsAfterFinished: 3600
+  backoffLimit: 0
+  template:
+    metadata:
+      name: prep
+      namespace: directpv
+    spec:
+      containers:
+      - args:
+        - prep
+        - -v=3
+        - --kube-node-name=$(KUBE_NODE_NAME)
+        - --license=/license/minio.license
+        env:
+        - name: KUBE_NODE_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: spec.nodeName
+        image: quay.io/minio/directpv:v5.0.0
+        name: prep
+        resources: {}
+        securityContext:
+          privileged: true
+        terminationMessagePath: /var/log/driver-termination-log
+        terminationMessagePolicy: FallbackToLogsOnError
+        volumeMounts:
+        - mountPath: /var/lib/directpv/
+          mountPropagation: Bidirectional
+          name: directpv-common-root
+        - mountPath: /sys
+          mountPropagation: Bidirectional
+          name: sysfs
+        - mountPath: /dev
+          mountPropagation: HostToContainer
+          name: devfs
+          readOnly: true
+        - mountPath: /run/udev/data
+          mountPropagation: Bidirectional
+          name: run-udev-data-dir
+          readOnly: true
+        - mountPath: /license
+          name: minio-license
+          readOnly: true
+      restartPolicy: Never
+      hostPID: true
+      serviceAccountName: directpv-min-io
+      volumes:
+      - hostPath:
+          path: /var/lib/directpv/
+          type: DirectoryOrCreate
+        name: directpv-common-root
+      - hostPath:
+          path: /sys
+          type: DirectoryOrCreate
+        name: sysfs
+      - hostPath:
+          path: /dev
+          type: DirectoryOrCreate
+        name: devfs
+      - hostPath:
+          path: /run/udev/data
+          type: DirectoryOrCreate
+        name: run-udev-data-dir
+      - name: minio-license
+        secret:
+          defaultMode: 444
+          secretName: minio-license
+          optional: true
