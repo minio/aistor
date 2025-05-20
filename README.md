@@ -125,6 +125,10 @@ As part of the Bundle installation, the following Custom Resource Definitions (C
 To Install the AIStor Object Store Operator Bundle, follow these steps:
 
 ```shell
+# 1) Create aistor namespace
+oc new-project aistor
+
+# 2) Install AIStor Object Store Operator bundle
 oc apply -f https://raw.githubusercontent.com/minio/aistor/master/resources/OperatorHub/ObjectStore/Subscription.yaml
 ```
 
