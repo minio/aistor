@@ -41,16 +41,17 @@ helm repo update
 WHen you add the repo, you can see the available charts with the following command:
 ```shell
 helm search repo aistor
-NAME               	CHART VERSION	APP VERSION        	DESCRIPTION                             
-aistor/aistor      	3.0.0        	v20250512190907.0.0	Helm chart for MinIO AIStor             
-aistor/aistor-crd  	1.0.1        	v20250411230718.0.0	Helm chart for MinIO AIStor CRDs        
-aistor/keymanager  	1.0.0        	v20250411230718.0.0	Helm chart for MinIO AIStor Key Manager 
-aistor/object-store	1.0.2        	                   	Helm chart for MinIO AIStor Object Store
+NAME                     	CHART VERSION	APP VERSION        	DESCRIPTION                                       
+aistor/aistor      	3.0.0        	v20250512190907.0.0	(Deprecated, please use operators chart) Helm c...
+aistor/aistor-crd  	1.0.1        	v20250411230718.0.0	(Deprecated, please use operators chart) Helm c...
+aistor/keymanager  	1.0.0        	                   	Helm chart for MinIO AIStor Key Manager           
+aistor/object-store	1.0.2        	                   	Helm chart for MinIO AIStor Object Store          
+aistor/operators   	3.0.0        	v20250512190907.0.0	Helm chart for MinIO AIStor Operators
 ```
 
-## AIStor Object Store Operator
+## AIStor Operators
 
-`aistor/aistor` is the AIStor operators chart, by default, it will install only 2 AIStor operators:
+`aistor/operators` is the AIStor operators chart, by default, it will install only 2 operators:
 
 * AIStor Object Store Operator
 * AIStor AdminJob Operator
@@ -60,17 +61,17 @@ You can install the AIStor operators with the following commands:
 ```shell
 
 helm install --namespace aistor \
-  --create-namespace aistor aistor/aistor \
+  --create-namespace operators aistor/operators \
   --set global.license="<your-license-key>"
-NAME: aistor
+NAME: operators
 LAST DEPLOYED: Tue May 20 16:03:59 2025
 NAMESPACE: aistor
 STATUS: deployed
 REVISION: 1
 TEST SUITE: None
 NOTES:
-Thank you for installing AIStor v20250512190907.0.0. Your release
-is named "aistor".
+Thank you for installing AIStor Operators v20250512190907.0.0. Your release
+is named "operators".
 
 The following operators have been installed:
 - adminjob-operator
@@ -99,20 +100,20 @@ The AIStor Key Manager Operator is responsible for managing the AIStor Key Manag
 To install the AIStor Key Manager Operator, you can use the following command:
 
 ```shell
-helm install --namespace aistor --create-namespace aistor aistor/aistor \
+helm install --namespace aistor --create-namespace operators aistor/operators \
   --set global.license="<your-license-key>" \
   --set operators.object-store.disabled=true \
   --set operators.adminjob.disabled=true \
   --set operators.keymanager.disabled=false
-NAME: aistor
+NAME: operators
 LAST DEPLOYED: Tue May 20 16:10:54 2025
 NAMESPACE: aistor
 STATUS: deployed
 REVISION: 1
 TEST SUITE: None
 NOTES:
-Thank you for installing AIStor v20250512190907.0.0. Your release
-is named "aistor".
+Thank you for installing AIStor Operators v20250512190907.0.0. Your release
+is named "operators".
 
 The following operators have been installed:
 - keymanager-operator
@@ -146,20 +147,20 @@ The AIStor AIHub Operator is responsible for managing the AIStor AIHub.
 To install the AIStor AIHub Operator, you can use the following command:
 
 ```shell
-helm install --namespace aistor --create-namespace aistor aistor/aistor \
+helm install --namespace aistor --create-namespace operators aistor/operators \
   --set global.license="<your-license-key>" \
   --set operators.object-store.disabled=true \
   --set operators.adminjob.disabled=true \
   --set operators.aihub.disabled=false
-NAME: aistor
+NAME: operators
 LAST DEPLOYED: Tue May 20 16:14:10 2025
 NAMESPACE: aistor
 STATUS: deployed
 REVISION: 1
 TEST SUITE: None
 NOTES:
-Thank you for installing AIStor v20250512190907.0.0. Your release
-is named "aistor".
+Thank you for installing AIStor Operators v20250512190907.0.0. Your release
+is named "operators".
 
 The following operators have been installed:
 - aihub-operator
@@ -172,20 +173,20 @@ The AIStor Prompt Operator is responsible for managing the AIStor Prompt.
 To install the AIStor Prompt Operator, you can use the following command:
 
 ```shell
-helm install --namespace aistor --create-namespace aistor aistor/aistor \
+helm install --namespace aistor --create-namespace operators aistor/operators \
   --set global.license="<your-license-key>" \
   --set operators.object-store.disabled=true \
   --set operators.adminjob.disabled=true \
   --set operators.prompt.disabled=false
-NAME: aistor
+NAME: operators
 LAST DEPLOYED: Tue May 20 16:15:47 2025
 NAMESPACE: aistor
 STATUS: deployed
 REVISION: 1
 TEST SUITE: None
 NOTES:
-Thank you for installing AIStor v20250512190907.0.0. Your release
-is named "aistor".
+Thank you for installing AIStor Operators v20250512190907.0.0. Your release
+is named "operators".
 
 The following operators have been installed:
 - prompt-operator
@@ -199,20 +200,20 @@ The AIStor WARP Operator is responsible for managing the AIStor WARP.
 To install the AIStor WARP Operator, you can use the following command:
 
 ```shell
-helm install --namespace aistor --create-namespace aistor aistor/aistor \
+helm install --namespace aistor --create-namespace operators aistor/operators \
   --set global.license="<your-license-key>" \
   --set operators.object-store.disabled=true \
   --set operators.adminjob.disabled=true \
   --set operators.warp.disabled=false
-NAME: aistor
+NAME: operators
 LAST DEPLOYED: Tue May 20 16:16:25 2025
 NAMESPACE: aistor
 STATUS: deployed
 REVISION: 1
 TEST SUITE: None
 NOTES:
-Thank you for installing AIStor v20250512190907.0.0. Your release
-is named "aistor".
+Thank you for installing AIStor Operators v20250512190907.0.0. Your release
+is named "operators".
 
 The following operators have been installed:
 - warp-operator
