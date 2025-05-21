@@ -1,0 +1,12 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: minio-key-manager-operator
+  namespace: aistor
+spec:
+  channel: stable
+  installPlanApproval: Automatic
+  name: minio-key-manager-operator
+  source: certified-operators
+  sourceNamespace: openshift-marketplace
+  startingCSV: minio-key-manager-operator.v2025.5.12190907
