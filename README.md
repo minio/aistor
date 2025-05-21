@@ -13,20 +13,20 @@ AIStor runs in Kubernetes.
 
 * An active Kubernetes environment running a [maintained version](https://kubernetes.io/releases/)
 * [`kubectl` CLI tool](https://kubernetes.io/docs/tasks/tools/#kubectl)
+* [`helm` CLI tool](https://helm.sh/docs/intro/install/)
+* `oc` CLI tool if you are using Openshift
 
 ### Environment
 
 You can run AIStor on Kubernetes providers such as
 
 - Redhat Openshift
+- Upstream Kubernetes
 - Google Kubernetes Engine
 - Amazon Elastic Kubernetes Service
 - Azure Kubernetes Service
-- Upstream Kubernetes
 
 Other Kubernetes providers may also work.
-
-# Getting Started
 
 # Helm
 
