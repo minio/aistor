@@ -26,11 +26,248 @@ You can run AIStor on Kubernetes providers such as
 
 Other Kubernetes providers may also work.
 
-## Getting Started
+# Getting Started
+
+# Helm
+
+## Helm charts Repo
+
+AIStor Helm repo is the official MinIO AIStor Helm repo. You can add it with the following command:
+```shell
+helm repo add aistor https://aistor.min.io/
+helm repo update
+```
+
+WHen you add the repo, you can see the available charts with the following command:
+```shell
+helm search repo aistor
+NAME               	CHART VERSION	APP VERSION        	DESCRIPTION                             
+aistor/aistor      	3.0.0        	v20250512190907.0.0	Helm chart for MinIO AIStor             
+aistor/aistor-crd  	1.0.1        	v20250411230718.0.0	Helm chart for MinIO AIStor CRDs        
+aistor/keymanager  	1.0.0        	v20250411230718.0.0	Helm chart for MinIO AIStor Key Manager 
+aistor/object-store	1.0.2        	                   	Helm chart for MinIO AIStor Object Store
+```
+
+## AIStor Object Store Operator
+
+`aistor/aistor` is the AIStor operators chart, by default, it will install only 2 AIStor operators:
+
+* AIStor Object Store Operator
+* AIStor AdminJob Operator
+
+You can install the AIStor operators with the following commands:
+
+```shell
+
+helm install --namespace aistor \
+  --create-namespace aistor aistor/aistor \
+  --set global.license="<your-license-key>"
+NAME: aistor
+LAST DEPLOYED: Tue May 20 16:03:59 2025
+NAMESPACE: aistor
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+NOTES:
+Thank you for installing AIStor v20250512190907.0.0. Your release
+is named "aistor".
+
+The following operators have been installed:
+- adminjob-operator
+- object-store-operator
+
+A license has been installed.
+```
+
+### AIStor Object Store
+
+Now you are ready to create your own AIStor object store, get the values.yaml file from the chart and edit it to your needs.
+
+```shell
+helm show values aistor/object-store > values.yaml
+```
+
+Finally, create the object store with the following command:
+
+```shell
+helm install my-objectstore aistor/object-store -n my-objectstore --create-namespace -f values.yaml 
+```
+
+## AIStor Key Manager Operator
+
+The AIStor Key Manager Operator is responsible for managing the AIStor Key Manager.
+To install the AIStor Key Manager Operator, you can use the following command:
+
+```shell
+helm install --namespace aistor --create-namespace aistor aistor/aistor \
+  --set global.license="<your-license-key>" \
+  --set operators.object-store.disabled=true \
+  --set operators.adminjob.disabled=true \
+  --set operators.keymanager.disabled=false
+NAME: aistor
+LAST DEPLOYED: Tue May 20 16:10:54 2025
+NAMESPACE: aistor
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+NOTES:
+Thank you for installing AIStor v20250512190907.0.0. Your release
+is named "aistor".
+
+The following operators have been installed:
+- keymanager-operator
+
+A license has been installed.
+```
+
+### AIStor Key Manager
+
+Once Key Manager Operator is installed, you can create your own AIStor Key Manager, get the values.yaml file from the chart and edit it to your needs.
+
+```shell
+helm show values aistor/keymanager > values.yaml
+```
+
+Next, you want to create the HSM master key, in order to do that, you need to create it running the `minkms` command, this is possible running it from the container:
+
+```shell
+docker run quay.io/minio/aistor/minkms:latest --soft-hsm
+hsm:aes256:9GvcPRfJ3j2jOKJlvlo0I3drwfWWYYCWnjbmTECNq/U=% 
+```
+
+Finally, create the Key Manager with the following command:
+
+```shell
+helm install my-keymanager aistor/keymanager -n my-keymanager --create-namespace --set  hsm.hsm="hsm:aes256:9GvcPRfJ3j2jOKJlvlo0I3drwfWWYYCWnjbmTECNq/U=%"
+```
+
+## AIStor AIHub Operator
+The AIStor AIHub Operator is responsible for managing the AIStor AIHub.
+To install the AIStor AIHub Operator, you can use the following command:
+
+```shell
+helm install --namespace aistor --create-namespace aistor aistor/aistor \
+  --set global.license="<your-license-key>" \
+  --set operators.object-store.disabled=true \
+  --set operators.adminjob.disabled=true \
+  --set operators.aihub.disabled=false
+NAME: aistor
+LAST DEPLOYED: Tue May 20 16:14:10 2025
+NAMESPACE: aistor
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+NOTES:
+Thank you for installing AIStor v20250512190907.0.0. Your release
+is named "aistor".
+
+The following operators have been installed:
+- aihub-operator
+
+A license has been installed.
+```
+
+## AIStor Prompt Operator
+The AIStor Prompt Operator is responsible for managing the AIStor Prompt.
+To install the AIStor Prompt Operator, you can use the following command:
+
+```shell
+helm install --namespace aistor --create-namespace aistor aistor/aistor \
+  --set global.license="<your-license-key>" \
+  --set operators.object-store.disabled=true \
+  --set operators.adminjob.disabled=true \
+  --set operators.prompt.disabled=false
+NAME: aistor
+LAST DEPLOYED: Tue May 20 16:15:47 2025
+NAMESPACE: aistor
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+NOTES:
+Thank you for installing AIStor v20250512190907.0.0. Your release
+is named "aistor".
+
+The following operators have been installed:
+- prompt-operator
+
+A license has been installed.
+```
+
+## AIStor WARP Operator
+
+The AIStor WARP Operator is responsible for managing the AIStor WARP.
+To install the AIStor WARP Operator, you can use the following command:
+
+```shell
+helm install --namespace aistor --create-namespace aistor aistor/aistor \
+  --set global.license="<your-license-key>" \
+  --set operators.object-store.disabled=true \
+  --set operators.adminjob.disabled=true \
+  --set operators.warp.disabled=false
+NAME: aistor
+LAST DEPLOYED: Tue May 20 16:16:25 2025
+NAMESPACE: aistor
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+NOTES:
+Thank you for installing AIStor v20250512190907.0.0. Your release
+is named "aistor".
+
+The following operators have been installed:
+- warp-operator
+
+A license has been installed.
+```
+
+# Openshift Operator Hub
+
+You can also install the AIStor operators from the Openshift Operator Hub.
+
+## AIStor Object Store Operator Bundle
+
+The Object Store Operator bundle includes the following Operators:
+
+* AIStor Object Store Operator
+* AIStor AdminJob Operator
+
+As part of the Bundle installation, the following Custom Resource Definitions (CRDs) are installed:
+
+* ObjectStore
+* AdminJob
+* PolicyBinding
+
+To Install the AIStor Object Store Operator Bundle, follow these steps:
+
+```shell
+# 1) Create aistor namespace
+oc new-project aistor
+
+# 2) Install AIStor Object Store Operator bundle
+oc apply -f https://raw.githubusercontent.com/minio/aistor/master/resources/OperatorHub/ObjectStore/Subscription.yaml
+```
+
+## AIStor Key Manager Operator Bundle
+The Key Manager Operator bundle includes the following Operators:
+* AIStor Key Manager Operator
+
+As part of the Bundle installation, the following Custom Resource Definitions (CRDs) are installed:
+* KeyManager
+
+To Install the AIStor Key Manager Operator Bundle, follow these steps:
+
+```shell
+# 1) Create aistor namespace
+oc new-project aistor
+# 2) Install AIStor Key Manager Operator bundle
+oc apply -f https://raw.githubusercontent.com/minio/aistor/master/resources/OperatorHub/KeyManager/Subscription.yaml
+```
+
+# Kustomize
 
 ### Install all AIStor Operators with the following `kubectl` command
 
-Install all AIStor operators at once
+Install all AIStor operators at once with Kustomize.
 
 ```shell
 kubectl apply --server-side -k https://min.io/k8s/aistor
@@ -84,53 +321,6 @@ type: Opaque
 kubectl apply --server-side -f  license.yaml
 ```
 
-### Install with helm
-
-Add the Helm chart repository and install the AIStor chart.
-
-```shell
-helm repo add aistor https://aistor.min.io/
-helm install --namespace aistor --create-namespace aistor aistor/aistor --set global.license=<your-license-key>
-```
-
-Now you are ready to create you own AIStor object store, get the values.yaml file from the chart and edit it to your needs.
-
-```shell
-helm show values aistor/object-store > values.yaml
-```
-
-Finally, create the object store with the following command:
-
-```shell
-helm install my-objectstore aistor/object-store -n my-objectstore --create-namespace -f values.yaml 
-```
-
-### Install in Openshift Operator Hub
-
-You can also install the AIStor operators from the Openshift Operator Hub.
-
-#### Install the AIStor Object Store Operator Bundle
-
-The Object Store Operator bundle includes the following Operators:
-
-* AIStor Object Store Operator
-* AIStor AdminJob Operator
-
-As part of the Bundle installation, the following Custom Resource Definitions (CRDs) are installed:
-
-* AIStor ObjectStore
-* AIStor AdminJob
-* AIStor PolicyBinding
-
-To Install the AIStor Object Store Operator Bundle, follow these steps:
-
-```shell
-# 1) Create aistor namespace
-oc new-project aistor
-
-# 2) Install AIStor Object Store Operator bundle
-oc apply -f https://raw.githubusercontent.com/minio/aistor/master/resources/OperatorHub/ObjectStore/Subscription.yaml
-```
 
 ### Help and support
 
