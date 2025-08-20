@@ -1,5 +1,8 @@
 # AIStor
 
+> [!WARNING]
+> This helm chart is deprecated, please use the [minio helm chart repo](https://helm.min.io/) instead.
+
 Hyperscale Object Store for AI
 
 MinIO AIStor is designed to allow enterprises to consolidate all of
