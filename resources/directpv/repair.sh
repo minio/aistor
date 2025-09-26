@@ -107,7 +107,7 @@ function repair() {
 
     pods_deleted=true
     if ! is_suspended "${drive_id}"; then
-        kubectl directpv suspend "${drive_id}"
+        kubectl directpv suspend drives "${drive_id}" --dangerous
 
         # shellcheck disable=SC2207
         volumes=( $(get_volumes "${drive_id}") )
