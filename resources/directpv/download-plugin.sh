@@ -47,6 +47,7 @@ function main() {
         x86_64) arch="amd64" ;;
         aarch64) arch="arm64" ;;
         ppc64le) arch="ppc64le" ;;
+        arm64) arch="arm64" ;;
         *) echo "ERROR: unsupported architecture ${arch}" >&2; exit 1 ;;
     esac
 
