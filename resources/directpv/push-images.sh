@@ -49,7 +49,7 @@ function push_image() {
     image="$1"
     private_image="${image/quay.io\/minio/$registry}"
     echo "Pushing image ${image}"
-    skopeo copy --multi-arch=all --all --preserve-digests "${image}" "${private_image}"
+    skopeo copy --multi-arch=all --preserve-digests "docker://${image}" "docker://${private_image}"
 }
 
 function main() {
