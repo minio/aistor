@@ -22,17 +22,13 @@ set -o pipefail
 
 version="5.0.1"
 
-function check_root() {
+function init() {
+    # Check for root privileges first
     if [ "$EUID" -ne 0 ]; then
         echo "ERROR: This script must be run as root" >&2
         echo "Please run with sudo or as root user" >&2
         exit 1
     fi
-}
-
-function init() {
-    # Check for root privileges first
-    check_root
 
     if [ "$#" -gt 1 ]; then
         cat <<EOF
