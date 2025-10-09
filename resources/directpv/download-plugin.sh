@@ -22,7 +22,18 @@ set -o pipefail
 
 version="5.0.1"
 
+function check_root() {
+    if [ "$EUID" -ne 0 ]; then
+        echo "ERROR: This script must be run as root" >&2
+        echo "Please run with sudo or as root user" >&2
+        exit 1
+    fi
+}
+
 function init() {
+    # Check for root privileges first
+    check_root
+
     if [ "$#" -gt 1 ]; then
         cat <<EOF
 USAGE:
@@ -51,7 +62,7 @@ function main() {
         *) echo "ERROR: unsupported architecture ${arch}" >&2; exit 1 ;;
     esac
 
-    curl -sfLo /usr/local/bin/kubectl-directpv "https://dl.min.io/aistor/directpv/release/${os}-${arch}/kubectl-directpv_${version}"
+    curl -fLo /usr/local/bin/kubectl-directpv "https://dl.min.io/aistor/directpv/release/${os}-${arch}/kubectl-directpv_${version}"
     chmod a+x /usr/local/bin/kubectl-directpv
 }
 
