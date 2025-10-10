@@ -16,7 +16,7 @@
 # This script repairs faulty drives
 #
 
-set -xe
+set -e
 
 ME=$(basename "$0"); export ME
 
@@ -142,7 +142,11 @@ function repair() {
     fi
 
     if [ "${pods_deleted}" == "true" ]; then
-        kubectl directpv repair "${drive_id}" "${force_flag}"
+        if [[ -n "${force_flag}" ]]; then
+            kubectl directpv repair "${drive_id}" "${force_flag}"
+        else
+            kubectl directpv repair "${drive_id}"
+        fi
     else
         echo "delete pods manually and retry again for drive ${drive_id}"
     fi
