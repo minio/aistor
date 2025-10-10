@@ -16,11 +16,12 @@
 # This script repairs faulty drives
 #
 
-set -e
+set -xe
 
 ME=$(basename "$0"); export ME
 
 declare -a drive_ids
+force_flag=""
 
 # usage: is_uuid <value>
 function is_uuid() {
@@ -30,7 +31,7 @@ function is_uuid() {
 # usage: get_suspend_value <drive-id>
 function get_suspend_value() {
     # shellcheck disable=SC2016
-    kubectl get directpvvolumes "${1}" \
+    kubectl get directpvdrives "${1}" \
             -o go-template='{{range $k,$v := .metadata.labels}}{{if eq $k "directpv.min.io/suspend"}}{{$v}}{{end}}{{end}}'
 }
 
@@ -90,15 +91,31 @@ EOF
         exit 255
     fi
 
-    for drive in "$@"; do
-        if ! is_uuid "${drive}"; then
-            echo "invalid drive ID ${drive}"
-            exit 255
-        fi
-        if [[ ! ${drive_ids[*]} =~ ${drive} ]]; then
-            drive_ids+=( "${drive}" )
-        fi
+    # Parse arguments
+    while [[ $# -gt 0 ]]; do
+        case $1 in
+            --force)
+                force_flag="--force"
+                shift
+                ;;
+            *)
+                if ! is_uuid "$1"; then
+                    echo "invalid drive ID $1"
+                    exit 255
+                fi
+                if [[ ! ${drive_ids[*]} =~ $1 ]]; then
+                    drive_ids+=( "$1" )
+                fi
+                shift
+                ;;
+        esac
     done
+
+   # Check if we have at least one drive ID
+      if [[ ${#drive_ids[@]} -eq 0 ]]; then
+          echo "no drive IDs provided"
+          exit 255
+      fi
 }
 
 # usage: repair <drive-id>
@@ -125,7 +142,7 @@ function repair() {
     fi
 
     if [ "${pods_deleted}" == "true" ]; then
-        kubectl directpv repair "${drive_id}"
+        kubectl directpv repair "${drive_id}" "${force_flag}"
     else
         echo "delete pods manually and retry again for drive ${drive_id}"
     fi
