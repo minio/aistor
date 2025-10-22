@@ -57,7 +57,7 @@ function main() {
     push_image "quay.io/minio/csi-provisioner:v5.2.0-0" # quay.io/minio/csi-provisioner@sha256:24816a743663d153060f0c3fc30005f05bea23c8b0fd2551fd667042741e8562
     push_image "quay.io/minio/livenessprobe:v2.15.0-0" # quay.io/minio/livenessprobe@sha256:d8f7d431a2a148970dcb337f24b265d173bcee58bbeeae9af7ae60f01ce49be2
     push_image "quay.io/minio/csi-resizer:v1.13.1-0" # quay.io/minio/csi-resizer@sha256:fc0c1f9cbc0ebb16283c0e425c031041eedb0e8ebbe6a1adec3de41584548ce6
-    push_image "quay.io/minio/directpv:v5.0.1" # quay.io/minio/directpv@sha256:20105107c1e381736e843f37332c138365dfe1588b0fecb03df106c89a5aa0ab
+    push_image "quay.io/minio/directpv:v5.0.2" # quay.io/minio/directpv@sha256:9c752ba828d005fcaa2dafa5a4cd69e873f159f44f0c2329d052e47e928a0a77
 }
 
 init "$@"

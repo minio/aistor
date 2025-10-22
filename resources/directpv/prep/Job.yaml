@@ -27,7 +27,7 @@ spec:
             fieldRef:
               apiVersion: v1
               fieldPath: spec.nodeName
-        image: quay.io/minio/directpv:v5.0.0
+        image: quay.io/minio/directpv:v5.0.2
         name: prep
         resources: {}
         securityContext:

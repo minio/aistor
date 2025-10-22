@@ -7,4 +7,4 @@ resources:
 
 images:
   - name: quay.io/minio/directpv
-    newTag: v5.0.0
+    newTag: v5.0.2

@@ -4,7 +4,7 @@ kind: DaemonSet
 metadata:
   creationTimestamp: null
   annotations:
-    directpv.min.io/image-tag: v5.0.0
+    directpv.min.io/image-tag: v5.0.2
   labels:
     application-name: directpv.min.io
     application-type: CSIDriver
@@ -66,7 +66,7 @@ spec:
               fieldPath: spec.nodeName
         - name: CSI_ENDPOINT
           value: unix:///csi/csi.sock
-        image: quay.io/minio/directpv:v5.0.0
+        image: quay.io/minio/directpv:v5.0.2
         livenessProbe:
           failureThreshold: 5
           httpGet:
@@ -129,7 +129,7 @@ spec:
             fieldRef:
               apiVersion: v1
               fieldPath: spec.nodeName
-        image: quay.io/minio/directpv:v5.0.0
+        image: quay.io/minio/directpv:v5.0.2
         name: node-controller
         resources: {}
         securityContext:

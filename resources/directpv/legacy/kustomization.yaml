@@ -10,7 +10,7 @@ resources:
 
 images:
   - name: quay.io/minio/directpv
-    newTag: v5.0.0
+    newTag: v5.0.2
 
   - name: quay.io/minio/csi-node-driver-registrar
     digest: sha256:8f00013a19bd3bea021f3e96b093814fb110b383c0fd050d2a5309afb0ed0ccb
