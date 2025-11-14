@@ -1,29 +1,45 @@
-
+#HELM+# {{- if eq (include "directpv.isLegacy" $) "true" }}
+#HELM+# {{ with .Values.controller }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  creationTimestamp: null
+  #HELM+# annotations:
+    #HELM+# {{- with $.Values.annotations }}
+    #HELM+# {{- . | toYaml | nindent 4 }}
+    #HELM+# {{- end }}
   labels:
     application-name: directpv.min.io
     application-type: CSIDriver
     directpv.min.io/created-by: kubectl-directpv
     directpv.min.io/version: v1beta1
+    #HELM+# {{- with $.Values.labels }}
+    #HELM+# {{- . | toYaml | nindent 4 }}
+    #HELM+# {{- end }}
   name: legacy-controller
   namespace: directpv
 spec:
-  replicas: 3
+  replicas: 3 #HELM-#
+  #HELM+# replicas: {{ .replicas }}
   selector:
     matchLabels:
-      selector.directpv.min.io: directpv-controller
+      selector.directpv.min.io: controller-legacy-controller
+      #HELM+# {{- with .podLabels }}
+      #HELM+# {{ . | toYaml | nindent 6 }}
+      #HELM+# {{- end }}
   strategy:
     type: Recreate
   template:
     metadata:
       annotations:
         created-by: kubectl-directpv
-      creationTimestamp: null
+        #HELM+# {{- with .podAnnotations }}
+        #HELM+# {{ . | toYaml | nindent 8 }}
+        #HELM+# {{- end }}
       labels:
-        selector.directpv.min.io: directpv-controller
+        selector.directpv.min.io: controller-legacy-controller
+        #HELM+# {{- with .podLabels }}
+        #HELM+# {{ . | toYaml | nindent 8 }}
+        #HELM+# {{- end }}
       name: legacy-controller
       namespace: directpv
     spec:
@@ -38,9 +54,10 @@ spec:
         env:
         - name: CSI_ENDPOINT
           value: unix:///csi/csi.sock
-        image: quay.io/minio/csi-provisioner@sha256:24816a743663d153060f0c3fc30005f05bea23c8b0fd2551fd667042741e8562
+        image: quay.io/minio/csi-provisioner@sha256:fff8927753ef1a67278804897de5dda9fd47c48b27575d53daafb12ab7179446 #HELM-#
+        #HELM+# image: {{ include "directpv.resolveImage" (dict "name" "csiProvisioner" "root" $) }}
+        #HELM+# imagePullPolicy: {{ $.Values.images.pullPolicy }}
         name: csi-provisioner
-        resources: {}
         securityContext:
           privileged: true
         terminationMessagePath: /var/log/controller-provisioner-termination-log
@@ -57,11 +74,15 @@ spec:
         env:
         - name: CSI_ENDPOINT
           value: unix:///csi/csi.sock
-        image: quay.io/minio/csi-resizer@sha256:fc0c1f9cbc0ebb16283c0e425c031041eedb0e8ebbe6a1adec3de41584548ce6
+        image: quay.io/minio/csi-resizer@sha256:0640655cdf10b17bf50b304d5c3555135141b6bd3d79260a3ce389bf90d4e4bf #HELM-#
+        #HELM+# image: {{ include "directpv.resolveImage" (dict "name" "csiResizer" "root" $) }}
+        #HELM+# imagePullPolicy: {{ $.Values.images.pullPolicy }}
         name: csi-resizer
-        resources: {}
         securityContext:
           privileged: true
+          #HELM+# {{ with .podSecurityContext }}
+          #HELM+# {{ . | toYaml | nindent 10 }}
+          #HELM+# {{ end }}
         terminationMessagePath: /var/log/controller-csi-resizer-termination-log
         terminationMessagePolicy: FallbackToLogsOnError
         volumeMounts:
@@ -73,7 +94,6 @@ spec:
         - -v=3
         - --csi-endpoint=$(CSI_ENDPOINT)
         - --kube-node-name=$(KUBE_NODE_NAME)
-        - --license=/license/minio.license
         env:
         - name: KUBE_NODE_NAME
           valueFrom:
@@ -82,31 +102,29 @@ spec:
               fieldPath: spec.nodeName
         - name: CSI_ENDPOINT
           value: unix:///csi/csi.sock
-        image: quay.io/minio/directpv:v5.0.2
+        image: quay.io/minio/directpv@sha256:76bb7e4d204f95fea9e05637f18b68de2e54543ed0e2f3c4eae330d72b304abb #HELM-#
+        #HELM+# image: {{ include "directpv.resolveImage" (dict "name" "directpv" "root" $) }}
+        #HELM+# imagePullPolicy: {{ $.Values.images.pullPolicy }}
         name: controller
         ports:
         - containerPort: 9898
           name: healthz
           protocol: TCP
-        resources: {}
         securityContext:
           privileged: true
         volumeMounts:
         - mountPath: /csi
           mountPropagation: None
           name: socket-dir
-        - name: minio-license
-          mountPath: /license
-          readOnly: true
+      #HELM+# {{- with $.Values.images.pullSecrets }}
+      #HELM+# imagePullSecrets: {{ . }}
+      #HELM+# {{- end }}
       serviceAccountName: directpv-min-io
       volumes:
       - hostPath:
-          path: /var/lib/kubelet/plugins/controller-controller
+          path: /var/lib/kubelet/plugins/controller-controller #HELM-#
+          #HELM+# path: {{ (include "directpv.kubeletDirPath" $) }}/plugins/controller-controller
           type: DirectoryOrCreate
         name: socket-dir
-      - name: minio-license
-        secret:
-          defaultMode: 444
-          secretName: minio-license
-          optional: true
-status: {}
+#HELM+# {{ end }}
+#HELM+# {{ end }}

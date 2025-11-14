@@ -1,4 +1,3 @@
-
 allowVolumeExpansion: true
 allowedTopologies:
 - matchLabelExpressions:
@@ -8,7 +7,10 @@ allowedTopologies:
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
-  creationTimestamp: null
+  #HELM+# annotations:
+    #HELM+# {{- with $.Values.annotations }}
+    #HELM+# {{- . | toYaml | nindent 4 }}
+    #HELM+# {{- end }}
   finalizers:
   - foregroundDeletion
   labels:
@@ -16,6 +18,9 @@ metadata:
     application-type: CSIDriver
     directpv.min.io/created-by: kubectl-directpv
     directpv.min.io/version: v1beta1
+    #HELM+# {{- with $.Values.labels }}
+    #HELM+# {{- . | toYaml | nindent 4 }}
+    #HELM+# {{- end }}
   name: directpv-min-io
 parameters:
   csi.storage.k8s.io/fstype: xfs
