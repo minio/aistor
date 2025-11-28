@@ -20,16 +20,14 @@ spec:
         - prep
         - -v=3
         - --kube-node-name=$(KUBE_NODE_NAME)
-        - --license=/license/minio.license
         env:
         - name: KUBE_NODE_NAME
           valueFrom:
             fieldRef:
               apiVersion: v1
               fieldPath: spec.nodeName
-        image: quay.io/minio/directpv:v5.0.2
+        image: quay.io/minio/directpv:v5.1.0 #HELM-#
         name: prep
-        resources: {}
         securityContext:
           privileged: true
         terminationMessagePath: /var/log/driver-termination-log
@@ -48,9 +46,6 @@ spec:
         - mountPath: /run/udev/data
           mountPropagation: Bidirectional
           name: run-udev-data-dir
-          readOnly: true
-        - mountPath: /license
-          name: minio-license
           readOnly: true
       restartPolicy: Never
       hostPID: true
@@ -72,8 +67,3 @@ spec:
           path: /run/udev/data
           type: DirectoryOrCreate
         name: run-udev-data-dir
-      - name: minio-license
-        secret:
-          defaultMode: 444
-          secretName: minio-license
-          optional: true

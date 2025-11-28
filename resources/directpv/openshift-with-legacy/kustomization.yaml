@@ -3,20 +3,21 @@ kind: Kustomization
 
 resources:
   - ../legacy
+  - ../openshift
 
 images:
   - name: quay.io/minio/csi-node-driver-registrar
     newName: registry.redhat.io/openshift4/ose-csi-node-driver-registrar-rhel8
-    digest: sha256:ceaad1d64ec06ac08cb77a84b01d083d26906b9c369b0c2a29fa9d327ef828ec
+    digest: sha256:a7bb01170545d879015a674ff2d8f1169e0a24da080efa53f6f2404e56373196
 
   - name: quay.io/minio/livenessprobe
     newName: registry.redhat.io/openshift4/ose-csi-livenessprobe-rhel8
-    digest: sha256:0f3b09189dbff4d03a0599d419f35ba2655f4d1123323722ca787c3e7bc5c188
+    digest: sha256:a6aa576de2ba40e5aba7af4605cf5725efc262c99d3c584f14e0ad2c89c8fd2c
 
   - name: quay.io/minio/csi-provisioner
     newName: registry.redhat.io/openshift4/ose-csi-external-provisioner-rhel8
-    digest: sha256:bc17101b25825b8206aff71799ceaf21191e9f1fc20c4c093a52df8585840786
+    digest: sha256:ffe69d56fe2137f8da357efd7712128b1b611ae5ce17cf342026874ad2588369
 
   - name: quay.io/minio/csi-resizer
     newName: registry.redhat.io/openshift4/ose-csi-external-resizer-rhel8
-    digest: sha256:488947bd50842bf6f8fcd216bbf927d4e9044eae71c9eff31db311aad4da045d
+    digest: sha256:9f73ff30445a500889b7f4d414b05cb558ae55aaf7161d387789857cd066af2f

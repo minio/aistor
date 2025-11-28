@@ -1,13 +1,19 @@
-
+#HELM+# {{- if eq (include "directpv.isLegacy" $) "true" }}
 apiVersion: storage.k8s.io/v1
 kind: CSIDriver
 metadata:
-  creationTimestamp: null
+  #HELM+# annotations:
+    #HELM+# {{- with $.Values.annotations }}
+    #HELM+# {{- . | toYaml | nindent 4 }}
+    #HELM+# {{- end }}
   labels:
     application-name: directpv.min.io
     application-type: CSIDriver
     directpv.min.io/created-by: kubectl-directpv
     directpv.min.io/version: v1beta1
+    #HELM+# {{- with $.Values.labels }}
+    #HELM+# {{- . | toYaml | nindent 4 }}
+    #HELM+# {{- end }}
   name: direct-csi-min-io
 spec:
   attachRequired: false
@@ -15,3 +21,4 @@ spec:
   volumeLifecycleModes:
   - Persistent
   - Ephemeral
+#HELM+# {{- end }}
